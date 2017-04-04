@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title_layout"/>
+
+    <include layout="@layout/divider_horizontal_dp"/>
+
+    <Button
+        android:id="@+id/activity_super_user_create_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="create" />
+
+    <Button
+        android:id="@+id/activity_super_user_delete_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="delete" />
+
+    <Button
+        android:id="@+id/activity_super_user_display_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="display" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/activity_super_user_display_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/padding_middle" />
+
+    </ScrollView>
+
+</LinearLayout>

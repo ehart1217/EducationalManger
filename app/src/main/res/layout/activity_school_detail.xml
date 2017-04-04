@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:test="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/common_title_layout" />
+
+    <include layout="@layout/divider_horizontal_dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:layout_marginTop="@dimen/margin_x_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="学校名称"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="武汉大学" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="英文名称"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_en_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="Wuhan University" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:layout_marginBottom="@dimen/margin_x_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="简称"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_short_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="WHU" />
+
+    </LinearLayout>
+
+    <include layout="@layout/divider_horizontal_px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:layout_marginTop="@dimen/margin_x_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="类别"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="公立大学" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="属性"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_property_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="985工程，211工程" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:layout_marginBottom="@dimen/margin_x_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="地区"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_area_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="湖北" />
+
+    </LinearLayout>
+
+    <include layout="@layout/divider_horizontal_px" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_small"
+        android:layout_marginBottom="@dimen/margin_x_small"
+        android:layout_marginTop="@dimen/margin_x_small"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingRight="@dimen/padding_small">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_x_small"
+            android:text="优势专业"
+            android:textColor="@color/font_main" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/activity_school_detail_advantage_major_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            test:text="生物专业，金融专业，计算机专业" />
+
+    </LinearLayout>
+
+    <include layout="@layout/divider_horizontal_px" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <include layout="@layout/divider_horizontal_px" />
+
+    <Button
+        android:id="@+id/activity_school_detail_all_major_btn"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_middle"
+        android:gravity="center"
+        android:background="@color/white"
+        android:text="查看所有专业"
+        android:textColor="@color/font_main" />
+
+</LinearLayout>

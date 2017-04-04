@@ -1,0 +1,71 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--字体大小-->
+    <dimen name="font_size_small">10sp</dimen>
+    <dimen name="font_size_middle">12sp</dimen>
+    <dimen name="font_size_large">14sp</dimen>
+    <dimen name="font_size_xlarge">16sp</dimen>
+    <dimen name="font_size_x_xlarge">20sp</dimen>
+
+    <!--item高度-->
+    <dimen name="item_height_x_small">24dp</dimen>
+    <dimen name="item_height_small">28dp</dimen>
+    <dimen name="item_height_middle_small">35dp</dimen>
+    <dimen name="item_height_middle">40dp</dimen>
+    <dimen name="item_height_large">48dp</dimen>
+    <dimen name="item_height_xlarge">60dp</dimen>
+    <dimen name="item_height_x_xlarge">80dp</dimen>
+    <dimen name="item_height_x_x_xlarge">100dp</dimen>
+
+    <!--button高度-->
+    <dimen name="btn_height_middle">42dp</dimen>
+    <dimen name="btn_width_middle">60dp</dimen>
+
+    <!--Margin距离-->
+    <dimen name="margin_x_x_small">5dp</dimen>
+    <dimen name="margin_x_small">8dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_middle_small">12dp</dimen>
+    <dimen name="margin_middle">16dp</dimen>
+    <dimen name="margin_large">20dp</dimen>
+    <dimen name="margin_xlarge">40dp</dimen>
+
+    <!--icon length-->
+    <dimen name="icon_length_x_small">18dp</dimen>
+    <dimen name="icon_length_small">25dp</dimen>
+    <dimen name="icon_length_middle">30dp</dimen>
+    <dimen name="icon_length_large">45dp</dimen>
+    <dimen name="icon_length_xlarge">60dp</dimen>
+
+    <!--带图片的文字框长度drawable text width-->
+    <dimen name="drawable_text_width_large">70dp</dimen>
+
+    <!--边框线宽-->
+    <dimen name="shape_stroke_width">1px</dimen>
+
+    <!--圆环宽度-->
+    <dimen name="ring_stroke_width">1dp</dimen>
+
+    <!--圆角像素-->
+    <dimen name="shape_corners_radius">8px</dimen>
+    <dimen name="shape_corners_radius_xlarge">30px</dimen>
+
+    <!--padding-->
+    <dimen name="padding_x_x_small">4dp</dimen>
+    <dimen name="padding_x_small">6dp</dimen>
+    <dimen name="padding_small">8dp</dimen>
+    <dimen name="padding_middle">12dp</dimen>
+    <dimen name="padding_middle_large">16dp</dimen>
+    <dimen name="padding_large">20dp</dimen>
+    <dimen name="padding_xlarge">25dp</dimen>
+    <dimen name="padding_x_xlarge">40dp</dimen>
+
+    <!-- 导航栏高度 -->
+    <dimen name="action_bar_height">48dp</dimen>
+
+    <dimen name="activity_margin_left_right">16dp</dimen>
+
+</resources>

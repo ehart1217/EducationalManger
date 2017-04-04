@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 按下 -->
+    <item android:color="@android:color/white" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:color="@android:color/white" android:state_enabled="true"/>
+    <!-- 默认 -->
+    <item android:color="@color/font_hint" android:state_enabled="false"/>
+
+</selector>
