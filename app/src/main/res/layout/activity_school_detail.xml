@@ -15,8 +15,8 @@
         android:layout_marginTop="@dimen/margin_x_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -44,8 +44,8 @@
         android:layout_height="@dimen/item_height_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -73,8 +73,8 @@
         android:layout_marginBottom="@dimen/margin_x_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -105,8 +105,8 @@
         android:layout_marginTop="@dimen/margin_x_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -134,8 +134,8 @@
         android:layout_height="@dimen/item_height_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -164,8 +164,8 @@
         android:layout_marginBottom="@dimen/margin_x_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -197,8 +197,8 @@
         android:layout_marginTop="@dimen/margin_x_small"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingRight="@dimen/padding_small">
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large">
 
         <TextView
             android:layout_width="wrap_content"
@@ -233,7 +233,7 @@
     <Button
         android:id="@+id/activity_school_detail_all_major_btn"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_middle"
+        android:layout_height="@dimen/item_height_large"
         android:gravity="center"
         android:background="@color/white"
         android:text="查看所有专业"

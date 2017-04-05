@@ -7,11 +7,12 @@
 
     <ImageView
         android:id="@+id/common_title_back_btn"
-        android:layout_width="@dimen/action_bar_height"
+        android:layout_width="@dimen/icon_length_xlarge"
         android:layout_height="match_parent"
         android:contentDescription="@null"
         android:gravity="center"
-        android:padding="@dimen/padding_middle"
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large"
         android:src="@drawable/icon_back" />
 
     <TextView
@@ -29,8 +30,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="right|center_vertical"
         android:gravity="center"
-        android:paddingLeft="@dimen/padding_middle"
-        android:paddingRight="@dimen/padding_middle"
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large"
         android:visibility="gone"
         test:visibility="visible"
         android:text="详情"/>

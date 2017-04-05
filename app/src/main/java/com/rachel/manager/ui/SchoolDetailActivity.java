@@ -121,6 +121,7 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
     protected void addListener() {
         super.addListener();
         mFunctionTv.setOnClickListener(this);
+        mAllMajorBtn.setOnClickListener(this);
     }
 
     @Override
@@ -134,6 +135,9 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
                 } else {
                     WebActivity.start(this, url);
                 }
+                break;
+            case R.id.activity_school_detail_all_major_btn:
+                CollegeActivity.start(this, mSchoolTable);
                 break;
         }
     }
