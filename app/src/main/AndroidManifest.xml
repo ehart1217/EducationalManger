@@ -24,6 +24,7 @@
         <activity android:name=".ui.SchoolDetailActivity" />
         <activity android:name=".ui.WebActivity" />
         <activity android:name=".ui.CollegeActivity" />
+        <activity android:name=".ui.MajorDetailActivity" />
     </application>
 
 </manifest>
