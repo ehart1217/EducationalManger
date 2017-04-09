@@ -61,6 +61,7 @@ public class DataGenerator {
         liteOrm.save(userTable2);
         liteOrm.save(userTable);
 
+        liteOrm.save(generateRankTable());
     }
 
     public static String checkData(Context context) {
@@ -167,5 +168,21 @@ public class DataGenerator {
 
     private static int randomInt(int num) {
         return random.nextInt(num);
+    }
+
+    private static ArrayList<RankTable> generateRankTable(){
+        RankTable rankTable1 = new RankTable("生物专业","1.武汉大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+        RankTable rankTable2 = new RankTable("化学专业","1.武汉大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+        RankTable rankTable3 = new RankTable("计算机专业","1.清华大学\n2.辣鸡大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+        RankTable rankTable4 = new RankTable("物理专业","1.武汉大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+        RankTable rankTable5 = new RankTable("会计专业","1.北京大学\n2.清华大学\n3.厦门大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+
+        ArrayList<RankTable> tables = new ArrayList<>();
+        tables.add(rankTable1);
+        tables.add(rankTable2);
+        tables.add(rankTable3);
+        tables.add(rankTable4);
+        tables.add(rankTable5);
+        return tables;
     }
 }

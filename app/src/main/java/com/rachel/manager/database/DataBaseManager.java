@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.litesuits.orm.LiteOrm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,6 +31,10 @@ public class DataBaseManager {
 
     public static void clearUser(){
 
+    }
+
+    public static ArrayList<RankTable> queryRanks(){
+        return mLiteOrm.query(RankTable.class);
     }
 
     public static List<SchoolTable> queryAllSchool() {

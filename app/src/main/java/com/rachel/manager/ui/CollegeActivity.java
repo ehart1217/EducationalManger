@@ -12,7 +12,7 @@ import com.rachel.manager.base.BaseActivity;
 import com.rachel.manager.database.CollegeTable;
 import com.rachel.manager.database.MajorTable;
 import com.rachel.manager.database.SchoolTable;
-import com.rachel.manager.ui.adapter.CollegeAdapter;
+import com.rachel.manager.ui.adapter.SelectAdapter;
 import com.rachel.manager.ui.adapter.MajorAdapter;
 
 import java.util.ArrayList;
@@ -31,8 +31,9 @@ public class CollegeActivity extends BaseActivity {
     private ListView mCollegeLv;
     private ListView mMajorLv;
 
-    private CollegeAdapter mCollegeAdapter;
+    private SelectAdapter mCollegeAdapter;
     private MajorAdapter mMajorAdapter;
+    private List<CollegeTable> mCollegeTableList;
 
     public static void start(Context context, SchoolTable schoolTable) {
         Intent starter = new Intent(context, CollegeActivity.class);
@@ -70,8 +71,8 @@ public class CollegeActivity extends BaseActivity {
                 // 学院item被点击
                 mCollegeAdapter.setSelectedIndex(position);
 
-                List<MajorTable> majorTables = mCollegeAdapter.getItem(position).getMajors();
-                if(majorTables == null){
+                List<MajorTable> majorTables = mCollegeTableList.get(position).getMajors();
+                if (majorTables == null) {
                     majorTables = new ArrayList<>();
                 }
                 mMajorAdapter.update(majorTables);
@@ -83,7 +84,7 @@ public class CollegeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 跳转到具体专业
                 MajorTable majorTable = mMajorAdapter.getItem(position);
-                MajorDetailActivity.start(CollegeActivity.this, majorTable.getId(),mSchoolTable.getId());
+                MajorDetailActivity.start(CollegeActivity.this, majorTable.getId(), mSchoolTable.getId());
             }
         });
     }
@@ -92,23 +93,31 @@ public class CollegeActivity extends BaseActivity {
     protected void initData() {
         super.initData();
         setTitle(mSchoolTable.getName());
-        List<CollegeTable> collegeTableList = mSchoolTable.getColleges();
-        if (collegeTableList == null) {
-            collegeTableList = new ArrayList<>();
+        mCollegeTableList = mSchoolTable.getColleges();
+        if (mCollegeTableList == null) {
+            mCollegeTableList = new ArrayList<>();
         }
-        mCollegeAdapter = new CollegeAdapter(this, collegeTableList);
+        mCollegeAdapter = new SelectAdapter(this, extractNameList(mCollegeTableList));
         mCollegeLv.setAdapter(mCollegeAdapter);
 
         List<MajorTable> majorTableList;
-        if (collegeTableList.isEmpty()) {
+        if (mCollegeTableList.isEmpty()) {
             majorTableList = new ArrayList<>();
         } else {
-            majorTableList = collegeTableList.get(0).getMajors();
+            majorTableList = mCollegeTableList.get(0).getMajors();
         }
-        if(majorTableList == null){
+        if (majorTableList == null) {
             majorTableList = new ArrayList<>();
         }
         mMajorAdapter = new MajorAdapter(this, majorTableList);
         mMajorLv.setAdapter(mMajorAdapter);
+    }
+
+    private List<String> extractNameList(List<CollegeTable> tableList) {
+        List<String> nameList = new ArrayList<>();
+        for (CollegeTable collegeTable : tableList) {
+            nameList.add(collegeTable.getName());
+        }
+        return nameList;
     }
 }

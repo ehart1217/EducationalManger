@@ -29,6 +29,7 @@
         <activity android:name=".ui.MajorDetailActivity" />
         <activity android:name=".ui.EditActivity" />
         <activity android:name=".ui.MeActivity" />
+        <activity android:name=".ui.RankActivity" />
     </application>
 
 </manifest>

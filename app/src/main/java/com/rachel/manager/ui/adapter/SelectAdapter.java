@@ -15,7 +15,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.rachel.manager.R;
-import com.rachel.manager.database.CollegeTable;
 
 import java.util.List;
 
@@ -23,15 +22,15 @@ import java.util.List;
  * @author wanchi@coolpad.com
  * @version 1.0, 2017/4/5
  */
-public class CollegeAdapter extends BaseAdapter {
+public class SelectAdapter extends BaseAdapter {
 
-    private List<CollegeTable> mCollegeTableList;
+    private List<String> mCollegeTableList;
 
     private LayoutInflater mInflater;
 
     private int mCurrentSelectedIndex = 0;
 
-    public CollegeAdapter(Context context, List<CollegeTable> majorTables) {
+    public SelectAdapter(Context context, List<String> majorTables) {
         super();
         mCollegeTableList = majorTables;
         mInflater = LayoutInflater.from(context);
@@ -43,7 +42,7 @@ public class CollegeAdapter extends BaseAdapter {
     }
 
     @Override
-    public CollegeTable getItem(int position) {
+    public String getItem(int position) {
         return mCollegeTableList.get(position);
     }
 
@@ -69,7 +68,7 @@ public class CollegeAdapter extends BaseAdapter {
             nameTv.setBackgroundResource(R.color.gray);
         }
 
-        String name = getItem(position).getName();
+        String name = getItem(position);
         nameTv.setText(name);
         return convertView;
     }

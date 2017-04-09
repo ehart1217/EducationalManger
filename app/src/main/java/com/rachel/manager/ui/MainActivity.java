@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 MeActivity.start(this);
                 break;
             case R.id.activity_main_rank_btn:
+                RankActivity.start(this);
                 break;
             case R.id.activity_main_filter_btn:
                 break;
