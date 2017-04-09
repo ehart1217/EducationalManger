@@ -25,8 +25,7 @@ public class SchoolTable extends BaseTable{
     private String area;//地区
     private boolean is985;
     private boolean is211;
-    @Mapping(Relation.OneToMany)
-    private ArrayList<CollegeTable> advantages;//优势专业
+    private String advantages;//优势专业
     private String enName;
     private String shortName;
     private String type;
@@ -83,11 +82,12 @@ public class SchoolTable extends BaseTable{
         this.is211 = is211;
     }
 
-    public ArrayList<CollegeTable> getAdvantages() {
+
+    public String getAdvantages() {
         return advantages;
     }
 
-    public void setAdvantages(ArrayList<CollegeTable> advantages) {
+    public void setAdvantages(String advantages) {
         this.advantages = advantages;
     }
 

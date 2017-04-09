@@ -51,23 +51,6 @@ public class DataGenerator {
             schoolTable.setAdvantages(getRandomAdvantages(collegeTableList));
             schoolTable.setColleges(collegeTableList);
             toSaveCollegeTable.addAll(collegeTableList);
-//            liteOrm.save(collegeTableList);
-
-
-//            ArrayList<CollegeTable> advantageCollegeTableList = DataGenerator.generateCollegeTables();
-//            for (CollegeTable collegeTable : advantageCollegeTableList) {
-//                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的艺术", schoolTable.getId());
-//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的机械", schoolTable.getId()));
-//                collegeTable.setMajors(majorTableList);
-////                liteOrm.save(majorTableList);
-//                toSaveMajor.addAll(majorTableList);
-//            }
-//            schoolTable.setColleges(advantageCollegeTableList);
-////            liteOrm.save(advantageCollegeTableList);
-//            toSaveCollegeTable.addAll(advantageCollegeTableList);
-
-//            userTable.setSchool(schoolTable);
-//            userTable2.setSchool(schoolTable);
         }
         liteOrm.save(toSaveMajor);
         liteOrm.save(toSaveCollegeTable);
@@ -172,15 +155,12 @@ public class DataGenerator {
         return majorTable;
     }
 
-    private static ArrayList<CollegeTable> getRandomAdvantages(List<CollegeTable> collegeTables) {
-        ArrayList<CollegeTable> collegeTableList = new ArrayList<>();
+    private static String getRandomAdvantages(List<CollegeTable> collegeTables) {
+        String advantage = "";
         for (CollegeTable collegeTable : collegeTables) {
-            if (collegeTableList.size() > 0) {
-                return collegeTableList;
-            }
-            collegeTableList.add(collegeTable);
+            advantage = collegeTable.getName();
         }
-        return collegeTableList;
+        return advantage;
     }
 
     private static int randomInt(int num) {
