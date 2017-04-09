@@ -83,7 +83,7 @@ public class CollegeActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 跳转到具体专业
                 MajorTable majorTable = mMajorAdapter.getItem(position);
-                MajorDetailActivity.start(CollegeActivity.this, majorTable);
+                MajorDetailActivity.start(CollegeActivity.this, majorTable.getId(),mSchoolTable.getId());
             }
         });
     }

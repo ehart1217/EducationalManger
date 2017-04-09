@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
@@ -20,7 +21,8 @@ import com.rachel.manager.database.UserTable;
 
 public class MajorDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private final static String KEY_MAJOR_TABLE = "key_major_table";
+    private final static String KEY_MAJOR_ID = "key_major_table";
+    private final static String KEY_SCHOOL_ID = "key_school_table";
     private final static int KEY_REQUEST_EDIT_CODE = 0;
 
     private MajorTable mMajorTable;
@@ -36,18 +38,25 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
     private View mCollegeCountContainer;
     private View mLineContainer;
 
-    public static void start(Context context, MajorTable majorTable) {
+    private int mSchoolId;
+
+    public static void start(Context context, int majorId,int schoolId) {
         Intent starter = new Intent(context, MajorDetailActivity.class);
-        starter.putExtra(KEY_MAJOR_TABLE, majorTable);
+        starter.putExtra(KEY_MAJOR_ID, majorId);
+        starter.putExtra(KEY_SCHOOL_ID, schoolId);
         context.startActivity(starter);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        mMajorTable = (MajorTable) getIntent().getSerializableExtra(KEY_MAJOR_TABLE);
+        int id = getIntent().getIntExtra(KEY_MAJOR_ID, 0);
+        mSchoolId = getIntent().getIntExtra(KEY_SCHOOL_ID, 0);
+
+        mMajorTable = DataBaseManager.queryById(id, MajorTable.class);
         if (mMajorTable == null) {
-            throw new IllegalArgumentException("major table cannot be null!");
+            Toast.makeText(this, "找不到该专业", Toast.LENGTH_SHORT).show();
+            this.finish();
         }
         setContentView(R.layout.activity_major_detail);
         super.onCreate(savedInstanceState);
@@ -91,7 +100,7 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void initEditMark() {
 
-        if (DataBaseManager.getCurrentUser().getRole() == UserTable.ROLE_MANAGER) {
+        if (canEdit()) {
             View majorCountView = findViewById(R.id.activity_major_detail_major_count_iv);
             View collegeCountView = findViewById(R.id.activity_major_detail_college_count_iv);
             View lineView = findViewById(R.id.activity_major_detail_line_iv);
@@ -105,7 +114,7 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void addListener() {
-        if (DataBaseManager.getCurrentUser().getRole() == UserTable.ROLE_MANAGER) {
+        if (canEdit()) {
             super.addListener();
             mMajorCountContainer.setOnClickListener(this);
             mCollegeCountContainer.setOnClickListener(this);
@@ -185,6 +194,11 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
                 DataBaseManager.update(mMajorTable);
             }
         }
+    }
+
+    private boolean canEdit(){
+        UserTable userTable = DataBaseManager.getCurrentUser();
+        return userTable.getRole() == UserTable.ROLE_MANAGER && userTable.getSchool() != null && userTable.getSchool().getId() == mSchoolId;
     }
 
 }

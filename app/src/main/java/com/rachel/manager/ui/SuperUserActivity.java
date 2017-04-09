@@ -33,6 +33,8 @@ public class SuperUserActivity extends BaseActivity implements View.OnClickListe
         setContentView(R.layout.activity_super_user);
         super.onCreate(savedInstanceState);
 
+        findView();
+
         mCreateBtn = findViewById(R.id.activity_super_user_create_btn);
         mDeleteBtn = findViewById(R.id.activity_super_user_delete_btn);
         mDisplayBtn = findViewById(R.id.activity_super_user_display_btn);

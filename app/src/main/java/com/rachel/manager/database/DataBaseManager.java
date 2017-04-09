@@ -37,6 +37,10 @@ public class DataBaseManager {
         updateCache();
     }
 
+    public static <T> T queryById(long id, Class<T> tClass) {
+        return mLiteOrm.queryById(id, tClass);
+    }
+
     public static void updateCache() {
         UserTable userTable = getCurrentUser();
         int id = userTable.getId();

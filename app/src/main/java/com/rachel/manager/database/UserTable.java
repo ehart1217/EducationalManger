@@ -32,7 +32,7 @@ public class UserTable extends BaseTable {
     private String password; //密码
     private String name = ""; //姓名
 
-    private long school; //学校
+    private SchoolTable school; //学校
 
     /**
      * 0，普通用户。1，管理员。2，super User。
@@ -70,11 +70,11 @@ public class UserTable extends BaseTable {
         this.name = name;
     }
 
-    public long getSchool() {
+    public SchoolTable getSchool() {
         return school;
     }
 
-    public void setSchool(long school) {
+    public void setSchool(SchoolTable school) {
         this.school = school;
     }
 

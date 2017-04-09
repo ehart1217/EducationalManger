@@ -43,7 +43,7 @@ public class DataGenerator {
             ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName().hashCode());
             for (CollegeTable collegeTable : collegeTableList) {
                 ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的计算机", collegeTable.getCollegeId());
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的经济管理", schoolTable.getId()));
+                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的经济管理", collegeTable.getCollegeId()));
                 collegeTable.setMajors(majorTableList);
 //                liteOrm.save(majorTableList);
                 toSaveMajor.addAll(majorTableList);
@@ -51,6 +51,8 @@ public class DataGenerator {
             schoolTable.setAdvantages(getRandomAdvantages(collegeTableList));
             schoolTable.setColleges(collegeTableList);
             toSaveCollegeTable.addAll(collegeTableList);
+
+            userTable2.setSchool(schoolTable);
         }
         liteOrm.save(toSaveMajor);
         liteOrm.save(toSaveCollegeTable);
@@ -124,7 +126,7 @@ public class DataGenerator {
 
     public static ArrayList<CollegeTable> generateCollegeTables(int schoolId) {
         ArrayList<CollegeTable> collegeTables = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 4; i++) {
             String name = "学院" + i;
             CollegeTable collegeTable = new CollegeTable(name.hashCode() + schoolId, name);
             collegeTables.add(collegeTable);
@@ -145,7 +147,7 @@ public class DataGenerator {
         subjectsSb.deleteCharAt(subjectsSb.length() - 1);
 
         StringBuilder resetSubjectsSb = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 4; i++) {
             resetSubjectsSb.append(year).append("年").append(major).append("专业重修课程").append(i).append("-");
         }
         resetSubjectsSb.deleteCharAt(resetSubjectsSb.length() - 1);
