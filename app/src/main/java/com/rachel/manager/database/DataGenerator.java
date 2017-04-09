@@ -40,9 +40,10 @@ public class DataGenerator {
 
         for (SchoolTable schoolTable : schoolTableList) {
 
-            ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables();
+            ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName().hashCode());
             for (CollegeTable collegeTable : collegeTableList) {
-                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors();
+                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的计算机", collegeTable.getCollegeId());
+                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的经济管理", schoolTable.getId()));
                 collegeTable.setMajors(majorTableList);
 //                liteOrm.save(majorTableList);
                 toSaveMajor.addAll(majorTableList);
@@ -53,19 +54,20 @@ public class DataGenerator {
 //            liteOrm.save(collegeTableList);
 
 
-            ArrayList<CollegeTable> advantageCollegeTableList = DataGenerator.generateCollegeTables();
-            for (CollegeTable collegeTable : advantageCollegeTableList) {
-                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors();
-                collegeTable.setMajors(majorTableList);
-//                liteOrm.save(majorTableList);
-                toSaveMajor.addAll(majorTableList);
-            }
-            schoolTable.setColleges(advantageCollegeTableList);
-//            liteOrm.save(advantageCollegeTableList);
-            toSaveCollegeTable.addAll(advantageCollegeTableList);
+//            ArrayList<CollegeTable> advantageCollegeTableList = DataGenerator.generateCollegeTables();
+//            for (CollegeTable collegeTable : advantageCollegeTableList) {
+//                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的艺术", schoolTable.getId());
+//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的机械", schoolTable.getId()));
+//                collegeTable.setMajors(majorTableList);
+////                liteOrm.save(majorTableList);
+//                toSaveMajor.addAll(majorTableList);
+//            }
+//            schoolTable.setColleges(advantageCollegeTableList);
+////            liteOrm.save(advantageCollegeTableList);
+//            toSaveCollegeTable.addAll(advantageCollegeTableList);
 
-            userTable.setSchool(schoolTable);
-            userTable2.setSchool(schoolTable);
+//            userTable.setSchool(schoolTable);
+//            userTable2.setSchool(schoolTable);
         }
         liteOrm.save(toSaveMajor);
         liteOrm.save(toSaveCollegeTable);
@@ -127,53 +129,53 @@ public class DataGenerator {
         return schools;
     }
 
-    public static ArrayList<MajorTable> generateMajors() {
-
-        String major = "计算机";
+    public static ArrayList<MajorTable> generateMajors(String majorName, long collegeId) {
 
         ArrayList<MajorTable> majorTables = new ArrayList<>();
 
-        majorTables.add(generateMajor(major, "2015"));
-        majorTables.add(generateMajor(major, "2016"));
-        majorTables.add(generateMajor(major, "2017"));
+        majorTables.add(generateMajor(majorName, "2015", collegeId));
+        majorTables.add(generateMajor(majorName, "2016", collegeId));
+        majorTables.add(generateMajor(majorName, "2017", collegeId));
         return majorTables;
     }
 
-    public static ArrayList<CollegeTable> generateCollegeTables() {
+    public static ArrayList<CollegeTable> generateCollegeTables(int schoolId) {
         ArrayList<CollegeTable> collegeTables = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 2; i++) {
             String name = "学院" + i;
-            CollegeTable collegeTable = new CollegeTable(name.hashCode() + index++, name);
+            CollegeTable collegeTable = new CollegeTable(name.hashCode() + schoolId, name);
             collegeTables.add(collegeTable);
         }
         return collegeTables;
     }
 
-    private static MajorTable generateMajor(String major, String year) {
-        MajorTable majorTable = new MajorTable((major + year).hashCode(), year, major);
+    private static MajorTable generateMajor(String major, String year, long schoolId) {
+        MajorTable majorTable = new MajorTable(year, major, (year + major + schoolId).hashCode() % 10000);
         majorTable.setEnrollmentCount(randomInt(100));
         majorTable.setLastAdmissionLine(500 + randomInt(100) + "");
         majorTable.setMajorEnrollmentCount(randomInt(20));
 
-        ArrayList<String> subjects = new ArrayList<>();
+        StringBuilder subjectsSb = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            subjects.add(year + "年" + major + "专业课程" + i);
+            subjectsSb.append(year).append("年").append(major).append("专业课程").append(i).append("-");
         }
+        subjectsSb.deleteCharAt(subjectsSb.length() - 1);
 
-        ArrayList<String> resetSubjects = new ArrayList<>();
+        StringBuilder resetSubjectsSb = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            resetSubjects.add(year + "年" + major + "专业重修课程" + i);
+            resetSubjectsSb.append(year).append("年").append(major).append("专业重修课程").append(i).append("-");
         }
+        resetSubjectsSb.deleteCharAt(resetSubjectsSb.length() - 1);
 
-        majorTable.setSubjects(subjects);
-        majorTable.setRetestSubjects(resetSubjects);
+        majorTable.setSubjects(subjectsSb.toString());
+        majorTable.setRetestSubjects(resetSubjectsSb.toString());
         return majorTable;
     }
 
     private static ArrayList<CollegeTable> getRandomAdvantages(List<CollegeTable> collegeTables) {
         ArrayList<CollegeTable> collegeTableList = new ArrayList<>();
         for (CollegeTable collegeTable : collegeTables) {
-            if (collegeTableList.size() > 2) {
+            if (collegeTableList.size() > 0) {
                 return collegeTableList;
             }
             collegeTableList.add(collegeTable);

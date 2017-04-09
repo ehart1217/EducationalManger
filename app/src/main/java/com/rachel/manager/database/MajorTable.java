@@ -4,9 +4,6 @@ import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.annotation.Unique;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * 专业
  * Created by Rachel on 17/4/3.
@@ -15,30 +12,40 @@ import java.util.List;
 public class MajorTable extends BaseTable {
     @Unique
     @NotNull
-    private long majorId;
-    @Unique
+    private String majorId;
     @NotNull
     private String year;//招生年份
     @NotNull
     private String name;//专业
+    @NotNull
+    private long code;
     private int enrollmentCount;//院招生人数
     private int majorEnrollmentCount;//专业招生人数
-    private ArrayList<String> subjects;//考试科目
-    private ArrayList<String> retestSubjects;//复试科目
+    private String subjects;//考试科目
+    private String retestSubjects;//复试科目
     private String lastAdmissionLine;//去年录取线
 
-    public MajorTable(long majorId, String year,String name) {
-        this.majorId = majorId;
+    public MajorTable(String year, String name, long code) {
+        this.majorId = year + code;
         this.year = year;
         this.name = name;
+        this.code = code;
     }
 
-    public long getMajorId() {
+    public String getMajorId() {
         return majorId;
     }
 
-    public void setMajorId(long majorId) {
+    public void setMajorId(String majorId) {
         this.majorId = majorId;
+    }
+
+    public long getCode() {
+        return code;
+    }
+
+    public void setCode(long code) {
+        this.code = code;
     }
 
     public String getYear() {
@@ -73,19 +80,19 @@ public class MajorTable extends BaseTable {
         this.majorEnrollmentCount = majorEnrollmentCount;
     }
 
-    public List<String> getSubjects() {
+    public String getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(ArrayList<String> subjects) {
+    public void setSubjects(String subjects) {
         this.subjects = subjects;
     }
 
-    public List<String> getRetestSubjects() {
+    public String getRetestSubjects() {
         return retestSubjects;
     }
 
-    public void setRetestSubjects(ArrayList<String> retestSubjects) {
+    public void setRetestSubjects(String retestSubjects) {
         this.retestSubjects = retestSubjects;
     }
 

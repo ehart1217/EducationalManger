@@ -14,4 +14,12 @@ public class BaseTable implements Serializable {
 
     @PrimaryKey(AssignType.AUTO_INCREMENT)
     protected int id = 0; //编号
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

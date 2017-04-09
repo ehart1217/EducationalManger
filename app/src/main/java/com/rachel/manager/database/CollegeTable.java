@@ -1,8 +1,10 @@
 package com.rachel.manager.database;
 
+import com.litesuits.orm.db.annotation.Mapping;
 import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.annotation.Unique;
+import com.litesuits.orm.db.enums.Relation;
 
 import java.util.ArrayList;
 
@@ -17,14 +19,15 @@ public class CollegeTable extends BaseTable {
 
     @Unique
     @NotNull
-    private long collegeId;
+    private int collegeId;
 
     @NotNull
     private String name;//院名称
 
+    @Mapping(Relation.OneToMany)
     private ArrayList<MajorTable> majors;//专业
 
-    public CollegeTable(long collegeId, String name) {
+    public CollegeTable(int collegeId, String name) {
         this.collegeId = collegeId;
         this.name = name;
     }
@@ -33,7 +36,7 @@ public class CollegeTable extends BaseTable {
         return collegeId;
     }
 
-    public void setCollegeId(long collegeId) {
+    public void setCollegeId(int collegeId) {
         this.collegeId = collegeId;
     }
 

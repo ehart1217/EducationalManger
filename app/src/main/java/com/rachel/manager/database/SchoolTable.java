@@ -25,6 +25,7 @@ public class SchoolTable extends BaseTable{
     private String area;//地区
     private boolean is985;
     private boolean is211;
+    @Mapping(Relation.OneToMany)
     private ArrayList<CollegeTable> advantages;//优势专业
     private String enName;
     private String shortName;

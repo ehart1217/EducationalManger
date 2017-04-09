@@ -2,6 +2,7 @@ package com.rachel.manager.base;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -22,6 +23,10 @@ public class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+    }
+
+    @CallSuper
+    protected void findView() {
         mTitleTv = (TextView) findViewById(R.id.common_title_content_tv);
         mFunctionTv = (TextView) findViewById(R.id.common_function_tv);
         mBackBtn = findViewById(R.id.common_title_back_btn);
@@ -34,9 +39,6 @@ public class BaseActivity extends Activity {
                 }
             });
         }
-    }
-
-    protected void findView() {
     }
 
     protected void initData() {

@@ -86,6 +86,7 @@
             <include layout="@layout/divider_horizontal_px" />
 
             <LinearLayout
+                android:id="@+id/activity_major_detail_major_count_container"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_large"
                 android:gravity="center_vertical"
@@ -123,6 +124,7 @@
             <include layout="@layout/divider_horizontal_px" />
 
             <LinearLayout
+                android:id="@+id/activity_major_detail_college_count_container"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_large"
                 android:gravity="center_vertical"
@@ -160,6 +162,7 @@
             <include layout="@layout/divider_horizontal_px" />
 
             <LinearLayout
+                android:id="@+id/activity_major_detail_line_container"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_large"
                 android:gravity="center_vertical"

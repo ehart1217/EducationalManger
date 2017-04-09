@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.rachel.manager.R;
 import com.rachel.manager.database.MajorTable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,13 +26,13 @@ import java.util.List;
  */
 public class MajorAdapter extends BaseAdapter {
 
-    private List<MajorTable> mMajorTableList;
+    private List<MajorTable> mMajorTableList = new ArrayList<>();
 
     private LayoutInflater mInflater;
 
     public MajorAdapter(Context context, List<MajorTable> majorTables) {
         super();
-        mMajorTableList = majorTables;
+        mMajorTableList.addAll(majorTables);
         mInflater = LayoutInflater.from(context);
     }
 

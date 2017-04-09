@@ -10,10 +10,7 @@ import android.widget.Toast;
 
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
-import com.rachel.manager.database.CollegeTable;
 import com.rachel.manager.database.SchoolTable;
-
-import java.util.List;
 
 /**
  * 学校详情页面
@@ -81,39 +78,39 @@ public class SchoolDetailActivity extends BaseActivity implements View.OnClickLi
     protected void initData() {
         super.initData();
 
-        setTitle(mSchoolTable.getName());
-        setFunction("详情");
-
-        mNameTv.setText(mSchoolTable.getName());
-        mEnNameTv.setText(mSchoolTable.getEnName());
-        mShortNameTv.setText(mSchoolTable.getShortName());
-        mTypeTv.setText(mSchoolTable.getType());
-
-        // 学校属性
-        String property = "";
-        if (mSchoolTable.is211()) {
-            property += "211平台";
-        }
-        if (mSchoolTable.is985()) {
-            property += "211平台,985平台";
-        }
-        mPropertyTv.setText(property);
-
-        //
-        mAreaTv.setText(mSchoolTable.getArea());
-
-        // 优势专业
-        List<CollegeTable> advantageList = mSchoolTable.getAdvantages();
-        StringBuilder advantageSb = new StringBuilder();
-        if (advantageList != null) {
-            for (CollegeTable collegeTable : advantageList) {
-                advantageSb.append(collegeTable.getName()).append(",");
-            }
-            if (advantageSb.length() > 0) {
-                advantageSb.deleteCharAt(advantageSb.length() - 1);
-            }
-        }
-        mAdvantageTv.setText(advantageSb.toString());
+//        setTitle(mSchoolTable.getName());
+//        setFunction("详情");
+//
+//        mNameTv.setText(mSchoolTable.getName());
+//        mEnNameTv.setText(mSchoolTable.getEnName());
+//        mShortNameTv.setText(mSchoolTable.getShortName());
+//        mTypeTv.setText(mSchoolTable.getType());
+//
+//        // 学校属性
+//        String property = "";
+//        if (mSchoolTable.is211()) {
+//            property += "211平台";
+//        }
+//        if (mSchoolTable.is985()) {
+//            property += "211平台,985平台";
+//        }
+//        mPropertyTv.setText(property);
+//
+//        //
+//        mAreaTv.setText(mSchoolTable.getArea());
+//
+//        // 优势专业
+//        List<CollegeTable> advantageList = mSchoolTable.getAdvantages();
+//        StringBuilder advantageSb = new StringBuilder();
+//        if (advantageList != null) {
+//            for (CollegeTable collegeTable : advantageList) {
+//                advantageSb.append(collegeTable.getName()).append(",");
+//            }
+//            if (advantageSb.length() > 0) {
+//                advantageSb.deleteCharAt(advantageSb.length() - 1);
+//            }
+//        }
+//        mAdvantageTv.setText(advantageSb.toString());
 
     }
 

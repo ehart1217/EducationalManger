@@ -2,11 +2,9 @@ package com.rachel.manager.database;
 
 import com.litesuits.orm.db.annotation.Column;
 import com.litesuits.orm.db.annotation.Ignore;
-import com.litesuits.orm.db.annotation.Mapping;
 import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.annotation.Unique;
-import com.litesuits.orm.db.enums.Relation;
 
 /**
  * 用户表
@@ -34,8 +32,7 @@ public class UserTable extends BaseTable {
     private String password; //密码
     private String name = ""; //姓名
 
-    @Mapping(Relation.ManyToOne)
-    private SchoolTable school; //学校
+    private long school; //学校
 
     /**
      * 0，普通用户。1，管理员。2，super User。
@@ -73,11 +70,11 @@ public class UserTable extends BaseTable {
         this.name = name;
     }
 
-    public SchoolTable getSchool() {
+    public long getSchool() {
         return school;
     }
 
-    public void setSchool(SchoolTable school) {
+    public void setSchool(long school) {
         this.school = school;
     }
 

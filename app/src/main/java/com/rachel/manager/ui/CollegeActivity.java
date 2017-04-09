@@ -9,7 +9,6 @@ import android.widget.ListView;
 
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
-import com.rachel.manager.database.CollegeTable;
 import com.rachel.manager.database.MajorTable;
 import com.rachel.manager.database.SchoolTable;
 import com.rachel.manager.ui.adapter.CollegeAdapter;
@@ -71,6 +70,9 @@ public class CollegeActivity extends BaseActivity {
                 mCollegeAdapter.setSelectedIndex(position);
 
                 List<MajorTable> majorTables = mCollegeAdapter.getItem(position).getMajors();
+                if(majorTables == null){
+                    majorTables = new ArrayList<>();
+                }
                 mMajorAdapter.update(majorTables);
             }
         });
@@ -88,21 +90,24 @@ public class CollegeActivity extends BaseActivity {
     @Override
     protected void initData() {
         super.initData();
-        setTitle(mSchoolTable.getName());
-        List<CollegeTable> collegeTableList = mSchoolTable.getColleges();
-        if (collegeTableList == null) {
-            collegeTableList = new ArrayList<>();
-        }
-        mCollegeAdapter = new CollegeAdapter(this, collegeTableList);
-        mCollegeLv.setAdapter(mCollegeAdapter);
-
-        List<MajorTable> majorTableList;
-        if (collegeTableList.isEmpty()) {
-            majorTableList = new ArrayList<>();
-        } else {
-            majorTableList = collegeTableList.get(0).getMajors();
-        }
-        mMajorAdapter = new MajorAdapter(this, majorTableList);
-        mMajorLv.setAdapter(mMajorAdapter);
+//        setTitle(mSchoolTable.getName());
+//        List<CollegeTable> collegeTableList = mSchoolTable.getColleges();
+//        if (collegeTableList == null) {
+//            collegeTableList = new ArrayList<>();
+//        }
+//        mCollegeAdapter = new CollegeAdapter(this, collegeTableList);
+//        mCollegeLv.setAdapter(mCollegeAdapter);
+//
+//        List<MajorTable> majorTableList;
+//        if (collegeTableList.isEmpty()) {
+//            majorTableList = new ArrayList<>();
+//        } else {
+//            majorTableList = collegeTableList.get(0).getMajors();
+//        }
+//        if(majorTableList == null){
+//            majorTableList = new ArrayList<>();
+//        }
+//        mMajorAdapter = new MajorAdapter(this, majorTableList);
+//        mMajorLv.setAdapter(mMajorAdapter);
     }
 }
