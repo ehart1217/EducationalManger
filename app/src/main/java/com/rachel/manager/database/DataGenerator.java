@@ -26,8 +26,12 @@ public class DataGenerator {
         LiteOrm liteOrm = DataBaseManager.getDateBase(context);
 
         String psw = MD5Utils.encode("111111", MD5Utils.SALT);
-        UserTable userTable = new UserTable("111111", psw, 2);
-        userTable.setName("ehart2");
+        UserTable userTable = new UserTable("111111", psw, 0);
+        userTable.setName("ehart");
+
+        String psw2 = MD5Utils.encode("222222", MD5Utils.SALT);
+        UserTable userTable2 = new UserTable("222222", psw2, 1);
+        userTable2.setName("Rachel");
 
         List<SchoolTable> schoolTableList = DataGenerator.generateSchool();
         List<CollegeTable> toSaveCollegeTable = new ArrayList<>();
@@ -61,10 +65,13 @@ public class DataGenerator {
             toSaveCollegeTable.addAll(advantageCollegeTableList);
 
             userTable.setSchool(schoolTable);
+            userTable2.setSchool(schoolTable);
         }
         liteOrm.save(toSaveMajor);
         liteOrm.save(toSaveCollegeTable);
         liteOrm.save(schoolTableList);
+
+        liteOrm.save(userTable2);
         liteOrm.save(userTable);
 
     }

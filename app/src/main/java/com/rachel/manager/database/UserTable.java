@@ -13,12 +13,16 @@ import com.litesuits.orm.db.enums.Relation;
  * Created by Rachel on 17/4/2.
  */
 @Table("user_table")
-public class UserTable extends BaseTable{
+public class UserTable extends BaseTable {
 
     @Ignore
     public static final String COL_USER_NAME = "userName";
     @Ignore
     public static final String COL_PASSWORD = "password";
+
+    public static final int ROLE_USER = 0;
+    public static final int ROLE_MANAGER = 1;
+    public static final int ROLE_SUPER_USER = 2;
 
     @NotNull
     @Unique

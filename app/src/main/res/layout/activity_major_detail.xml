@@ -24,7 +24,7 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:paddingLeft="@dimen/padding_middle_large"
-                android:paddingRight="@dimen/padding_large">
+                android:paddingRight="22dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -39,13 +39,14 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/activity_school_detail_name_tv"
+                    android:id="@+id/activity_major_detail_code_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     test:text="112344" />
             </LinearLayout>
 
+            <include layout="@layout/divider_horizontal_px" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,16 +69,18 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/activity_school_detail_name_tv"
+                    android:id="@+id/activity_major_detail_year_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     test:text="2017" />
 
                 <ImageView
+                    android:id="@+id/activity_major_detail_year_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_arrow_16"/>
+                    android:src="@drawable/icon_arrow_16"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <include layout="@layout/divider_horizontal_px" />
@@ -103,16 +106,18 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/activity_school_detail_name_tv"
+                    android:id="@+id/activity_major_detail_major_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     test:text="230" />
 
                 <ImageView
+                    android:id="@+id/activity_major_detail_major_count_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_arrow_16"/>
+                    android:src="@drawable/icon_arrow_16"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <include layout="@layout/divider_horizontal_px" />
@@ -138,19 +143,19 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/activity_school_detail_name_tv"
+                    android:id="@+id/activity_major_detail_college_count_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     test:text="30" />
 
                 <ImageView
+                    android:id="@+id/activity_major_detail_college_count_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_arrow_16"/>
+                    android:src="@drawable/icon_arrow_16"
+                    android:visibility="invisible" />
             </LinearLayout>
-
-            <include layout="@layout/divider_horizontal_px" />
 
             <include layout="@layout/divider_horizontal_px" />
 
@@ -176,16 +181,18 @@
                     android:layout_weight="1" />
 
                 <TextView
-                    android:id="@+id/activity_school_detail_name_tv"
+                    android:id="@+id/activity_major_detail_line_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     test:text="602" />
 
                 <ImageView
+                    android:id="@+id/activity_major_detail_line_iv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_arrow_16"/>
+                    android:src="@drawable/icon_arrow_16"
+                    android:visibility="invisible" />
             </LinearLayout>
 
             <include layout="@layout/divider_horizontal_px" />
@@ -199,11 +206,12 @@
                 android:textColor="@color/font_main" />
 
             <TextView
+                android:id="@+id/activity_major_detail_subject"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_x_xlarge"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/padding_middle_large"
                 android:paddingRight="@dimen/padding_middle_large"
-                android:gravity="center_vertical"
                 android:textSize="@dimen/font_size_middle"
                 test:text="哈哈哈哈哈哈哈哈哈哈哈哈" />
 
@@ -219,11 +227,12 @@
                 android:textColor="@color/font_main" />
 
             <TextView
+                android:id="@+id/activity_major_detail_retest_subject"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_height_x_xlarge"
+                android:gravity="center_vertical"
                 android:paddingLeft="@dimen/padding_middle_large"
                 android:paddingRight="@dimen/padding_middle_large"
-                android:gravity="center_vertical"
                 android:textSize="@dimen/font_size_middle"
                 test:text="哈哈哈哈哈哈哈哈哈哈哈哈" />
         </LinearLayout>
