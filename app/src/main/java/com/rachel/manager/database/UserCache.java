@@ -18,4 +18,8 @@ public class UserCache {
         }
         return userTable;
     }
+
+    public static void clear() {
+        userTable = null;
+    }
 }

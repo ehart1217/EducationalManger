@@ -74,6 +74,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
         int id = v.getId();
         switch (id) {
             case R.id.activity_main_me_btn:
+                MeActivity.start(this);
                 break;
             case R.id.activity_main_rank_btn:
                 break;

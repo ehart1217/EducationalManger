@@ -50,7 +50,7 @@ public class WebActivity extends BaseActivity {
         settings.setJavaScriptEnabled(true);
         webView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
 
-        progressBar = ProgressDialog.show(this, "WebView Example", "Loading...");
+        progressBar = ProgressDialog.show(this, "加载百科", "Loading...");
 
         webView.setWebViewClient(new WebViewClient() {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {

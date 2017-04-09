@@ -28,6 +28,10 @@ public class DataBaseManager {
         return UserCache.get();
     }
 
+    public static void clearUser(){
+
+    }
+
     public static List<SchoolTable> queryAllSchool() {
         return mLiteOrm.query(SchoolTable.class);
     }

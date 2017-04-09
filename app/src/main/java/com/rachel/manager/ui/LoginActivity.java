@@ -1,5 +1,7 @@
 package com.rachel.manager.ui;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -40,6 +42,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private View mRememberPsw;
 
     private SharedPreferenceHelper mSharedPreferenceHelper;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, LoginActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
