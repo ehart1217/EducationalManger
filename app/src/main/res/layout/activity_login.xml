@@ -9,16 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/item_height_x_xlarge"
         android:gravity="center"
-        android:text="酷酷的教务管理系统欢迎你(づ￣ 3￣)づ"
+        android:text="酷酷的研究院校查询系统欢迎您"
         android:textColor="@color/font_main"
         android:textSize="@dimen/font_size_x_xlarge" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/margin_large"
         android:gravity="center"
-        android:text="此处应该有图..."
         android:textColor="@color/font_main"
         android:textSize="@dimen/font_size_xlarge" />
 
