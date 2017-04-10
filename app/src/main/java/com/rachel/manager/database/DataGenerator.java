@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.litesuits.orm.LiteOrm;
+import com.rachel.manager.R;
 import com.rachel.manager.utils.MD5Utils;
 
 import java.util.ArrayList;
@@ -42,8 +43,8 @@ public class DataGenerator {
 
             ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName().hashCode());
             for (CollegeTable collegeTable : collegeTableList) {
-                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的计算机", collegeTable.getCollegeId());
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的经济管理", collegeTable.getCollegeId()));
+                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的软件工程", collegeTable.getCollegeId());
+                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的建筑设计", collegeTable.getCollegeId()));
                 collegeTable.setMajors(majorTableList);
 //                liteOrm.save(majorTableList);
                 toSaveMajor.addAll(majorTableList);
@@ -52,7 +53,9 @@ public class DataGenerator {
             schoolTable.setColleges(collegeTableList);
             toSaveCollegeTable.addAll(collegeTableList);
 
-            userTable2.setSchool(schoolTable);
+            if("辽宁大学".equals(schoolTable.getName())){
+                userTable2.setSchool(schoolTable);
+            }
         }
         liteOrm.save(toSaveMajor);
         liteOrm.save(toSaveCollegeTable);
@@ -91,23 +94,27 @@ public class DataGenerator {
 
     public static ArrayList<SchoolTable> generateSchool() {
         ArrayList<SchoolTable> schools = new ArrayList<>();
-        SchoolTable school1 = new SchoolTable("野鸡大学");
-        school1.setArea("北京");
-        school1.setIs211(true);
-        school1.setIs985(false);
-        school1.setDetailLink("http://baike.baidu.com/item/%E9%87%8E%E9%B8%A1%E5%A4%A7%E5%AD%A6");
-        school1.setEnName("wild chicken college");
+        SchoolTable school1 = new SchoolTable("辽宁大学");
+        school1.setArea("沈阳");
+        school1.setIs211(false);
+        school1.setIs985(true);
+        school1.setDetailLink("http://baike.baidu.com/link?url=8SEJfsFFai0d06NAGMNl9PhBle-bIiDhTgvTlZnlxRcAb6rgLVyyju2hxTkytb4IOrN5vjfiv99vA5GPbOQeOFBJlBIwQC4EePZRthvoB7b6mj3_YrjY8cn6zSDbLS8i");
+        school1.setEnName("Liaoning University");
         school1.setType("公立大学");
-        school1.setShortName("野大");
+        school1.setShortName("辽大");
+        school1.setDesc("辽宁大学（Liaoning University）是辽宁省人民政府主管的一所具备文、史、哲、经、法、理、工、管、艺等九大学科门类的综合性重点大学，是国家“211工程”重点建设院校，是卓越法律人才教育培养计划入选院校，是设有国家经济学基础人才培养基地的十三所高校之一。");
+        school1.setIcon(R.drawable.liaoningdaxue);
 
         SchoolTable school2 = new SchoolTable("野鸡大学2");
         school2.setArea("沈阳");
         school2.setIs211(false);
         school2.setIs985(true);
         school2.setDetailLink("http://baike.baidu.com/item/%E7%89%9B%E9%AD%94%E7%8E%8B/4468?sefr=cr");
-        school1.setEnName("yejidaxue");
-        school1.setType("私立大学");
-        school1.setShortName("野鸡");
+        school2.setEnName("wild chicken college");
+        school2.setType("公立大学");
+        school2.setShortName("野大");
+        school2.setDesc("野鸡大学也称“学历工厂”、“虚假大学”、“学店”，其办学以营利为目的，通常采用与知名大学院校容易混淆的名称，以混淆视听的方式招收学生，以各种手段钻相关国家法律漏洞，滥发文凭。");
+        school2.setIcon(R.drawable.yejidaxue);
 
         schools.add(school1);
         schools.add(school2);
@@ -127,8 +134,9 @@ public class DataGenerator {
 
     public static ArrayList<CollegeTable> generateCollegeTables(int schoolId) {
         ArrayList<CollegeTable> collegeTables = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            String name = "学院" + i;
+        String[] nameArray = new String[]{"计算机","自动化","信息工程","工商管理","土木工程","新闻学"};
+        for (int i = 0; i < nameArray.length; i++) {
+            String name = nameArray[i];
             CollegeTable collegeTable = new CollegeTable(name.hashCode() + schoolId, name);
             collegeTables.add(collegeTable);
         }
@@ -143,13 +151,13 @@ public class DataGenerator {
 
         StringBuilder subjectsSb = new StringBuilder();
         for (int i = 0; i < 5; i++) {
-            subjectsSb.append(year).append("年").append(major).append("专业课程").append(i).append("-");
+            subjectsSb.append(year).append("年").append(major).append("专业课程").append(i).append("\n");
         }
         subjectsSb.deleteCharAt(subjectsSb.length() - 1);
 
         StringBuilder resetSubjectsSb = new StringBuilder();
         for (int i = 0; i < 4; i++) {
-            resetSubjectsSb.append(year).append("年").append(major).append("专业重修课程").append(i).append("-");
+            resetSubjectsSb.append(year).append("年").append(major).append("专业重修课程").append(i).append("\n");
         }
         resetSubjectsSb.deleteCharAt(resetSubjectsSb.length() - 1);
 
@@ -171,11 +179,11 @@ public class DataGenerator {
     }
 
     private static ArrayList<RankTable> generateRankTable(){
-        RankTable rankTable1 = new RankTable("生物专业","1.武汉大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
-        RankTable rankTable2 = new RankTable("化学专业","1.武汉大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
-        RankTable rankTable3 = new RankTable("计算机专业","1.清华大学\n2.辣鸡大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
-        RankTable rankTable4 = new RankTable("物理专业","1.武汉大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
-        RankTable rankTable5 = new RankTable("会计专业","1.北京大学\n2.清华大学\n3.厦门大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+        RankTable rankTable1 = new RankTable("生物专业","1.辽宁大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n");
+        RankTable rankTable2 = new RankTable("化学专业","1.辽宁大学\n2.清华大学\n3.北京大学\n4.野鸡大学\n5.负担大学\n6.华中科技大学");
+        RankTable rankTable3 = new RankTable("计算机专业","1.辽宁大学\n2.华中科技大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.清华大学");
+        RankTable rankTable4 = new RankTable("物理专业","1.辽宁大学\n2.野鸡大学\n3.北京大学\n4.负担大学\n5.清華大学\n6.华中科技大学");
+        RankTable rankTable5 = new RankTable("会计专业","1.辽宁大学\n2.清华大学\n3.厦门大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
 
         ArrayList<RankTable> tables = new ArrayList<>();
         tables.add(rankTable1);

@@ -19,6 +19,7 @@ public class SchoolTable extends BaseTable{
     @Unique
     private String name;//学校名称
     private String detailLink;//百科
+    private String desc;
 
     @Mapping(Relation.OneToMany)
     private ArrayList<CollegeTable> colleges;//院
@@ -29,6 +30,7 @@ public class SchoolTable extends BaseTable{
     private String enName;
     private String shortName;
     private String type;
+    private int icon;
 
     public SchoolTable(String name) {
         this.name = name;
@@ -56,6 +58,22 @@ public class SchoolTable extends BaseTable{
 
     public void setColleges(ArrayList<CollegeTable> colleges) {
         this.colleges = colleges;
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 
     public String getArea() {

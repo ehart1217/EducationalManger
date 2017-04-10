@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.rachel.manager.R;
@@ -17,12 +18,12 @@ import java.util.List;
  * Created by Rachel on 17/4/4.
  */
 
-public class SchoolDescAdapter extends BaseAdapter{
+public class SchoolDescAdapter extends BaseAdapter {
 
     private List<SchoolTable> mSchoolTableList;
     private LayoutInflater mInflater;
 
-    public SchoolDescAdapter(Context context, List<SchoolTable> schoolTableList){
+    public SchoolDescAdapter(Context context, List<SchoolTable> schoolTableList) {
         mSchoolTableList = schoolTableList;
         mInflater = LayoutInflater.from(context);
     }
@@ -45,9 +46,10 @@ public class SchoolDescAdapter extends BaseAdapter{
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder;
-        if(convertView == null){
+        if (convertView == null) {
             convertView = mInflater.inflate(R.layout.item_school_desc, parent, false);
             holder = new Holder();
+            holder.iconIv = (ImageView) convertView.findViewById(R.id.item_school_icon);
             holder.nameTv = (TextView) convertView.findViewById(R.id.item_school_name_tv);
             holder.descTv = (TextView) convertView.findViewById(R.id.item_school_desc_tv);
             convertView.setTag(holder);
@@ -57,12 +59,22 @@ public class SchoolDescAdapter extends BaseAdapter{
 
         SchoolTable schoolTable = getItem(position);
         holder.nameTv.setText(schoolTable.getName());
-        holder.descTv.setText("这是一段描述性文字，待会再到数据库加这个字段");
+        holder.descTv.setText(schoolTable.getDesc());
+        if (schoolTable.getIcon() != 0) {
+            try {
+                holder.iconIv.setImageResource(schoolTable.getIcon());
+            } catch (Exception e){
+                holder.iconIv.setImageResource(R.drawable.yejidaxue);
+            }
+        } else {
+            holder.iconIv.setImageResource(R.drawable.yejidaxue);
+        }
 
         return convertView;
     }
 
-    private static class Holder{
+    private static class Holder {
+        ImageView iconIv;
         TextView nameTv;
         TextView descTv;
     }
