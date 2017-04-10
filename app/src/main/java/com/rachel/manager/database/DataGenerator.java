@@ -133,14 +133,14 @@ public class DataGenerator {
     }
 
     public static ArrayList<CollegeTable> generateCollegeTables(int schoolId) {
-        ArrayList<CollegeTable> collegeTables = new ArrayList<>();
+        ArrayList<CollegeTable> collegeTableList = new ArrayList<>();
         String[] nameArray = new String[]{"计算机","自动化","信息工程","工商管理","土木工程","新闻学"};
         for (int i = 0; i < nameArray.length; i++) {
             String name = nameArray[i];
             CollegeTable collegeTable = new CollegeTable(name.hashCode() + schoolId, name);
-            collegeTables.add(collegeTable);
+            collegeTableList.add(collegeTable);
         }
-        return collegeTables;
+        return collegeTableList;
     }
 
     private static MajorTable generateMajor(String major, String year, long schoolId) {
