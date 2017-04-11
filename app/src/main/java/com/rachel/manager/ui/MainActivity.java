@@ -2,10 +2,14 @@ package com.rachel.manager.ui;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.Toast;
 
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
@@ -14,7 +18,13 @@ import com.rachel.manager.database.SchoolTable;
 import com.rachel.manager.helper.OnTouchEffectedListener;
 import com.rachel.manager.ui.adapter.SchoolDescAdapter;
 
-public class MainActivity extends BaseActivity implements View.OnClickListener ,AdapterView.OnItemClickListener{
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.rachel.manager.R.id.filter_985;
+import static com.rachel.manager.R.id.filter_area;
+
+public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     private ListView mSchoolLv;
     private View mMeBtn;
@@ -22,6 +32,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
     private View mFilterBtn;
 
     private SchoolDescAdapter mSchoolAdapter;
+    private PopupWindow mPopupWindow;
+
+    private final static int REQUEST_CODE_AREA = 1;
+    private final static int REQUEST_CODE_MAJOR = 2;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
@@ -64,7 +78,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
 
         mMeBtn.setOnTouchListener(new OnTouchEffectedListener());
         mRankBtn.setOnTouchListener(new OnTouchEffectedListener());
-        mFilterBtn .setOnTouchListener(new OnTouchEffectedListener());
+        mFilterBtn.setOnTouchListener(new OnTouchEffectedListener());
 
         mSchoolLv.setOnItemClickListener(this);
     }
@@ -80,13 +94,80 @@ public class MainActivity extends BaseActivity implements View.OnClickListener ,
                 RankActivity.start(this);
                 break;
             case R.id.activity_main_filter_btn:
+                // 筛选
+                showFilterMenu();
+                break;
+            case R.id.filter_area:
+                mPopupWindow.dismiss();
+                ArrayList<String> areaList = DataBaseManager.queryAllSchoolAreas();
+                FilterConditionActivity.startForResult(this, "地区", areaList, REQUEST_CODE_AREA);
+                break;
+            case R.id.filter_major:
+                mPopupWindow.dismiss();
+                ArrayList<String> majorList = DataBaseManager.queryAllSchoolAreas();
+                FilterConditionActivity.startForResult(this, "专业", majorList, REQUEST_CODE_AREA);
+
+                break;
+            case R.id.filter_985:
+                updateSchool(DataBaseManager.query985School());
+                mPopupWindow.dismiss();
+                break;
+            case R.id.filter_211:
+                updateSchool(DataBaseManager.query211School());
+                mPopupWindow.dismiss();
+                break;
+            case R.id.filter_no_condition:
+                updateSchool(DataBaseManager.queryAllSchool());
+                mPopupWindow.dismiss();
                 break;
         }
+    }
+
+    // 筛选菜单
+    private void showFilterMenu() {
+        if (mPopupWindow == null) {
+            LayoutInflater inflater = LayoutInflater.from(this);
+            View contentView = inflater.inflate(R.layout.popup_window_filter, null);
+            View areaMenu = contentView.findViewById(filter_area);
+            View majorMenu = contentView.findViewById(R.id.filter_major);
+            View menu985 = contentView.findViewById(filter_985);
+            View menu211 = contentView.findViewById(R.id.filter_211);
+            View noFilter = contentView.findViewById(R.id.filter_no_condition);
+
+            areaMenu.setOnClickListener(this);
+            majorMenu.setOnClickListener(this);
+            menu985.setOnClickListener(this);
+            menu211.setOnClickListener(this);
+            noFilter.setOnClickListener(this);
+
+            mPopupWindow = new PopupWindow(this);
+            mPopupWindow.setBackgroundDrawable(new BitmapDrawable());
+            mPopupWindow.setOutsideTouchable(true);
+            mPopupWindow.setFocusable(true);
+            mPopupWindow.setContentView(contentView);
+        }
+        mPopupWindow.showAsDropDown(mFilterBtn);
+    }
+
+    private void updateSchool(List<SchoolTable> schoolTableList) {
+        mSchoolAdapter.update(schoolTableList);
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         SchoolTable schoolTable = mSchoolAdapter.getItem(position);
-        SchoolDetailActivity.start(this,schoolTable);
+        SchoolDetailActivity.start(this, schoolTable);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_CODE_AREA) {
+                Toast.makeText(this, data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT), Toast.LENGTH_SHORT).show();
+            } else if (requestCode == REQUEST_CODE_MAJOR) {
+                Toast.makeText(this, data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT), Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

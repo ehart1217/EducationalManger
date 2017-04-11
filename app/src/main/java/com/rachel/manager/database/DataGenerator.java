@@ -105,7 +105,7 @@ public class DataGenerator {
         school1.setDesc("辽宁大学（Liaoning University）是辽宁省人民政府主管的一所具备文、史、哲、经、法、理、工、管、艺等九大学科门类的综合性重点大学，是国家“211工程”重点建设院校，是卓越法律人才教育培养计划入选院校，是设有国家经济学基础人才培养基地的十三所高校之一。");
         school1.setIcon(R.drawable.liaoningdaxue);
 
-        SchoolTable school2 = new SchoolTable("野鸡大学2");
+        SchoolTable school2 = new SchoolTable("野鸡大学1");
         school2.setArea("沈阳");
         school2.setIs211(false);
         school2.setIs985(true);
@@ -116,8 +116,32 @@ public class DataGenerator {
         school2.setDesc("野鸡大学也称“学历工厂”、“虚假大学”、“学店”，其办学以营利为目的，通常采用与知名大学院校容易混淆的名称，以混淆视听的方式招收学生，以各种手段钻相关国家法律漏洞，滥发文凭。");
         school2.setIcon(R.drawable.yejidaxue);
 
+        SchoolTable school3 = new SchoolTable("野鸡大学3");
+        school3.setArea("北京");
+        school3.setIs211(true);
+        school3.setIs985(false);
+        school3.setDetailLink("http://baike.baidu.com/item/%E7%89%9B%E9%AD%94%E7%8E%8B/4468?sefr=cr");
+        school3.setEnName("wild chicken college");
+        school3.setType("公立大学");
+        school3.setShortName("野大");
+        school3.setDesc("野鸡大学也称“学历工厂”、“虚假大学”、“学店”，其办学以营利为目的，通常采用与知名大学院校容易混淆的名称，以混淆视听的方式招收学生，以各种手段钻相关国家法律漏洞，滥发文凭。");
+        school3.setIcon(R.drawable.yejidaxue);
+
+        SchoolTable school4 = new SchoolTable("野鸡大学4");
+        school4.setArea("北京");
+        school4.setIs211(false);
+        school4.setIs985(false);
+        school4.setDetailLink("http://baike.baidu.com/item/%E7%89%9B%E9%AD%94%E7%8E%8B/4468?sefr=cr");
+        school4.setEnName("wild chicken college");
+        school4.setType("公立大学");
+        school4.setShortName("野大");
+        school4.setDesc("野鸡大学也称“学历工厂”、“虚假大学”、“学店”，其办学以营利为目的，通常采用与知名大学院校容易混淆的名称，以混淆视听的方式招收学生，以各种手段钻相关国家法律漏洞，滥发文凭。");
+        school4.setIcon(R.drawable.yejidaxue);
+
         schools.add(school1);
         schools.add(school2);
+        schools.add(school3);
+        schools.add(school4);
 
         return schools;
     }

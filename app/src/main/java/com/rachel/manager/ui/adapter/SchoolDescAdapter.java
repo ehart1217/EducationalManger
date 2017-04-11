@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.rachel.manager.R;
 import com.rachel.manager.database.SchoolTable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,8 @@ public class SchoolDescAdapter extends BaseAdapter {
     private LayoutInflater mInflater;
 
     public SchoolDescAdapter(Context context, List<SchoolTable> schoolTableList) {
-        mSchoolTableList = schoolTableList;
+        mSchoolTableList = new ArrayList<>();
+        mSchoolTableList.addAll(schoolTableList);
         mInflater = LayoutInflater.from(context);
     }
 
@@ -71,6 +73,12 @@ public class SchoolDescAdapter extends BaseAdapter {
         }
 
         return convertView;
+    }
+
+    public void update(List<SchoolTable> schoolTableList){
+        mSchoolTableList.clear();
+        mSchoolTableList.addAll(schoolTableList);
+        notifyDataSetChanged();
     }
 
     private static class Holder {

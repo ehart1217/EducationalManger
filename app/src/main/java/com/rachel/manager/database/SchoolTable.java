@@ -1,5 +1,7 @@
 package com.rachel.manager.database;
 
+import com.litesuits.orm.db.annotation.Column;
+import com.litesuits.orm.db.annotation.Ignore;
 import com.litesuits.orm.db.annotation.Mapping;
 import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
@@ -15,6 +17,13 @@ import java.util.ArrayList;
 @Table("school_table")
 public class SchoolTable extends BaseTable{
 
+    @Ignore
+    public static final String COL_211 = "is211";
+    @Ignore
+    public static final String COL_985 = "is985";
+    @Ignore
+    public static final String COL_AREA = "area";
+
     @NotNull
     @Unique
     private String name;//学校名称
@@ -23,8 +32,11 @@ public class SchoolTable extends BaseTable{
 
     @Mapping(Relation.OneToMany)
     private ArrayList<CollegeTable> colleges;//院
+    @Column(COL_AREA)
     private String area;//地区
+    @Column(COL_985)
     private boolean is985;
+    @Column(COL_211)
     private boolean is211;
     private String advantages;//优势专业
     private String enName;

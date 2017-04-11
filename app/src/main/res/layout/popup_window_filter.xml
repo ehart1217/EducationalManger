@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:background="#424242"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_x_small"
+    android:paddingLeft="@dimen/padding_middle_large"
+    android:paddingRight="@dimen/padding_middle_large"
+    android:paddingTop="@dimen/padding_x_small">
+
+    <TextView
+        android:id="@+id/filter_area"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="地区"
+        android:textColor="@color/white" />
+
+    <include layout="@layout/divider_horizontal_gray_px" />
+
+    <TextView
+        android:id="@+id/filter_major"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="专业"
+        android:textColor="@color/white" />
+
+    <include layout="@layout/divider_horizontal_gray_px" />
+
+    <TextView
+        android:id="@+id/filter_985"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="985"
+        android:textColor="@color/white" />
+
+    <include layout="@layout/divider_horizontal_gray_px" />
+
+    <TextView
+        android:id="@+id/filter_211"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="211"
+        android:textColor="@color/white" />
+
+    <include layout="@layout/divider_horizontal_gray_px" />
+
+    <TextView
+        android:id="@+id/filter_no_condition"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:text="不筛选"
+        android:textColor="@color/white" />
+
+
+</LinearLayout>
