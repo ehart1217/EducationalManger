@@ -41,10 +41,10 @@ public class DataGenerator {
 
         for (SchoolTable schoolTable : schoolTableList) {
 
-            ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName().hashCode());
+            ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName());
             for (CollegeTable collegeTable : collegeTableList) {
-                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的软件工程", collegeTable.getCollegeId());
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的建筑设计", collegeTable.getCollegeId()));
+                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的软件工程", collegeTable.getCollegeId(), schoolTable.getName());
+                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的建筑设计", collegeTable.getCollegeId(), schoolTable.getName()));
                 collegeTable.setMajors(majorTableList);
 //                liteOrm.save(majorTableList);
                 toSaveMajor.addAll(majorTableList);
@@ -53,7 +53,7 @@ public class DataGenerator {
             schoolTable.setColleges(collegeTableList);
             toSaveCollegeTable.addAll(collegeTableList);
 
-            if("辽宁大学".equals(schoolTable.getName())){
+            if ("辽宁大学".equals(schoolTable.getName())) {
                 userTable2.setSchool(schoolTable);
             }
         }
@@ -146,29 +146,40 @@ public class DataGenerator {
         return schools;
     }
 
-    public static ArrayList<MajorTable> generateMajors(String majorName, long collegeId) {
+    public static ArrayList<MajorTable> generateMajors(String majorName, long collegeId, String schoolName) {
 
         ArrayList<MajorTable> majorTables = new ArrayList<>();
 
-        majorTables.add(generateMajor(majorName, "2015", collegeId));
-        majorTables.add(generateMajor(majorName, "2016", collegeId));
-        majorTables.add(generateMajor(majorName, "2017", collegeId));
+        majorTables.add(generateMajor(majorName, "2015", collegeId, schoolName));
+        majorTables.add(generateMajor(majorName, "2016", collegeId, schoolName));
+        majorTables.add(generateMajor(majorName, "2017", collegeId, schoolName));
         return majorTables;
     }
 
-    public static ArrayList<CollegeTable> generateCollegeTables(int schoolId) {
+    public static ArrayList<CollegeTable> generateCollegeTables(String schoolName) {
         ArrayList<CollegeTable> collegeTableList = new ArrayList<>();
-        String[] nameArray = new String[]{"计算机","自动化","信息工程","工商管理","土木工程","新闻学"};
+        String[] nameArray;
+        switch (schoolName.hashCode() % 3) {
+            case 0:
+                nameArray = new String[]{"计算机", "自动化", "信息工程", "工商管理", "土木工程", "新闻学"};
+                break;
+            case 1:
+                nameArray = new String[]{"计算机", "理论经济学", "信息管理", "新闻传播学", "土木工程", "化学"};
+                break;
+            default:
+                nameArray = new String[]{"计算机", "法学", "信息工程", "工商管理", "土木工程", "新闻学", "应用经济学"};
+                break;
+        }
         for (int i = 0; i < nameArray.length; i++) {
             String name = nameArray[i];
-            CollegeTable collegeTable = new CollegeTable(name.hashCode() + schoolId, name);
+            CollegeTable collegeTable = new CollegeTable((name + schoolName).hashCode(), name, schoolName);
             collegeTableList.add(collegeTable);
         }
         return collegeTableList;
     }
 
-    private static MajorTable generateMajor(String major, String year, long schoolId) {
-        MajorTable majorTable = new MajorTable(year, major, (year + major + schoolId).hashCode() % 10000);
+    private static MajorTable generateMajor(String major, String year, long collegeId, String schoolName) {
+        MajorTable majorTable = new MajorTable(year, major, (year + major + collegeId).hashCode() % 1000000, schoolName);
         majorTable.setEnrollmentCount(randomInt(100));
         majorTable.setLastAdmissionLine(500 + randomInt(100) + "");
         majorTable.setMajorEnrollmentCount(randomInt(20));
@@ -202,12 +213,12 @@ public class DataGenerator {
         return random.nextInt(num);
     }
 
-    private static ArrayList<RankTable> generateRankTable(){
-        RankTable rankTable1 = new RankTable("生物专业","1.辽宁大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n");
-        RankTable rankTable2 = new RankTable("化学专业","1.辽宁大学\n2.清华大学\n3.北京大学\n4.野鸡大学\n5.负担大学\n6.华中科技大学");
-        RankTable rankTable3 = new RankTable("计算机专业","1.辽宁大学\n2.华中科技大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.清华大学");
-        RankTable rankTable4 = new RankTable("物理专业","1.辽宁大学\n2.野鸡大学\n3.北京大学\n4.负担大学\n5.清華大学\n6.华中科技大学");
-        RankTable rankTable5 = new RankTable("会计专业","1.辽宁大学\n2.清华大学\n3.厦门大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+    private static ArrayList<RankTable> generateRankTable() {
+        RankTable rankTable1 = new RankTable("生物专业", "1.辽宁大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n");
+        RankTable rankTable2 = new RankTable("化学专业", "1.辽宁大学\n2.清华大学\n3.北京大学\n4.野鸡大学\n5.负担大学\n6.华中科技大学");
+        RankTable rankTable3 = new RankTable("计算机专业", "1.辽宁大学\n2.华中科技大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.清华大学");
+        RankTable rankTable4 = new RankTable("物理专业", "1.辽宁大学\n2.野鸡大学\n3.北京大学\n4.负担大学\n5.清華大学\n6.华中科技大学");
+        RankTable rankTable5 = new RankTable("会计专业", "1.辽宁大学\n2.清华大学\n3.厦门大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
 
         ArrayList<RankTable> tables = new ArrayList<>();
         tables.add(rankTable1);

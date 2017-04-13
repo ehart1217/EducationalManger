@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
 
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
@@ -67,6 +66,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
         mSchoolAdapter = new SchoolDescAdapter(this, DataBaseManager.queryAllSchool());
         mSchoolLv.setAdapter(mSchoolAdapter);
+        setTitle("");
     }
 
     @Override
@@ -104,21 +104,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 break;
             case R.id.filter_major:
                 mPopupWindow.dismiss();
-                ArrayList<String> majorList = DataBaseManager.queryAllSchoolAreas();
-                FilterConditionActivity.startForResult(this, "专业", majorList, REQUEST_CODE_AREA);
-
+                ArrayList<String> majorList = DataBaseManager.queryAllSchoolMajors();
+                FilterConditionActivity.startForResult(this, "专业", majorList, REQUEST_CODE_MAJOR);
                 break;
             case R.id.filter_985:
                 updateSchool(DataBaseManager.query985School());
                 mPopupWindow.dismiss();
+                afterFilter();
                 break;
             case R.id.filter_211:
                 updateSchool(DataBaseManager.query211School());
                 mPopupWindow.dismiss();
+                afterFilter();
                 break;
             case R.id.filter_no_condition:
                 updateSchool(DataBaseManager.queryAllSchool());
                 mPopupWindow.dismiss();
+                setTitle("");
                 break;
         }
     }
@@ -149,6 +151,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mPopupWindow.showAsDropDown(mFilterBtn);
     }
 
+    private void afterFilter() {
+        setTitle("已筛选");
+    }
+
     private void updateSchool(List<SchoolTable> schoolTableList) {
         mSchoolAdapter.update(schoolTableList);
     }
@@ -164,10 +170,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_CODE_AREA) {
-                Toast.makeText(this, data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT), Toast.LENGTH_SHORT).show();
+                String area = data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT);
+                updateSchool(DataBaseManager.querySchoolByArea(area));
             } else if (requestCode == REQUEST_CODE_MAJOR) {
-                Toast.makeText(this, data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT), Toast.LENGTH_SHORT).show();
+                String major = data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT);
+                updateSchool(DataBaseManager.querSchoolByMajor(major));
             }
+            afterFilter();
         }
     }
 }

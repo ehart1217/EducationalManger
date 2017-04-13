@@ -30,6 +30,9 @@
     <color name="disable">#D5D5D5</color>
     <color name="bg_blue">#69A4F1</color>
     <color name="transparent">#00000000</color>
+    <color name="bg_dlg">#424242</color>
+
+
 
     <!-- android主色调 -->
     <color name="primary">#DD4041</color>

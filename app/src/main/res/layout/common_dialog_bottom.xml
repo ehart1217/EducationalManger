@@ -16,9 +16,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/padding_small"
-            android:text="@string/btn_cancel"
-            android:textColor="@color/second"
-            android:textSize="@dimen/font_16" />
+            android:text="取消"
+            android:textColor="@color/font_main"
+            android:textSize="16sp" />
     </FrameLayout>
 
     <FrameLayout
@@ -32,9 +32,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="@dimen/padding_small"
-            android:text="@string/btn_ok"
-            android:textColor="@color/primary"
-            android:textSize="@dimen/font_16" />
+            android:text="确定"
+            android:textColor="@color/font_main"
+            android:textSize="16sp" />
     </FrameLayout>
 
 </LinearLayout>

@@ -47,6 +47,32 @@ public class DataBaseManager {
     }
 
     @NonNull
+    public static List<SchoolTable> querySchoolByArea(String area) {
+        ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
+                .where(SchoolTable.COL_AREA + " = ?", area));
+        return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
+    }
+
+    public static List<SchoolTable> querSchoolByMajor(String major) {
+        ArrayList<MajorTable> majorTables = mLiteOrm.query(new QueryBuilder<>(MajorTable.class)
+                .where(MajorTable.COL_MAJOR_NAME + " = ?", major));
+        if (majorTables == null) {
+            return new ArrayList<>();
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append('(');
+        for (MajorTable majorTable : majorTables) {
+            stringBuilder.append('\'').append(majorTable.getSchoolName()).append('\'').append(',');
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        stringBuilder.append(')');
+
+        ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
+                .where(SchoolTable.COL_NAME + " IN " + stringBuilder.toString()));
+        return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
+    }
+
+    @NonNull
     public static List<SchoolTable> query211School() {
         ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
                 .where(SchoolTable.COL_211 + " = ?", "true")
@@ -69,12 +95,27 @@ public class DataBaseManager {
         if (schoolTableList != null) {
             for (SchoolTable schoolTable : schoolTableList) {
                 String area = schoolTable.getArea();
-                if(!TextUtils.isEmpty(area)){
+                if (!TextUtils.isEmpty(area)) {
                     areas.add(area);
                 }
             }
         }
         return areas;
+    }
+
+    public static ArrayList<String> queryAllSchoolMajors() {
+        ArrayList<MajorTable> majorTables = mLiteOrm.query(new QueryBuilder<>(MajorTable.class)
+                .columns(new String[]{MajorTable.COL_MAJOR_NAME}).distinct(true));
+        ArrayList<String> majors = new ArrayList<>();
+        if (majorTables != null) {
+            for (MajorTable majorTable : majorTables) {
+                String name = majorTable.getName();
+                if (!TextUtils.isEmpty(name)) {
+                    majors.add(name);
+                }
+            }
+        }
+        return majors;
     }
 
     public static void update(Object o) {

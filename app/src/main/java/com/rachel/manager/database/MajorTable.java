@@ -1,5 +1,6 @@
 package com.rachel.manager.database;
 
+import com.litesuits.orm.db.annotation.Column;
 import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.annotation.Unique;
@@ -10,26 +11,35 @@ import com.litesuits.orm.db.annotation.Unique;
  */
 @Table("major_table")
 public class MajorTable extends BaseTable {
+
+    @NotNull
+    public final static String COL_MAJOR_NAME = "name";
+
     @Unique
     @NotNull
     private String majorId;
     @NotNull
     private String year;//招生年份
     @NotNull
+    @Column(COL_MAJOR_NAME)
     private String name;//专业
     @NotNull
     private long code;
+    @NotNull
+    private String schoolName; // 学校名称
+
     private int enrollmentCount;//院招生人数
     private int majorEnrollmentCount;//专业招生人数
     private String subjects;//考试科目
     private String retestSubjects;//复试科目
     private String lastAdmissionLine;//去年录取线
 
-    public MajorTable(String year, String name, long code) {
+    public MajorTable(String year, String name, long code, String schoolName) {
         this.majorId = year + code;
         this.year = year;
         this.name = name;
         this.code = code;
+        this.schoolName = schoolName;
     }
 
     public String getMajorId() {
@@ -104,16 +114,26 @@ public class MajorTable extends BaseTable {
         this.lastAdmissionLine = lastAdmissionLine;
     }
 
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
     @Override
     public String toString() {
         return "MajorTable{" +
-                "majorId=" + majorId +
+                "majorId='" + majorId + '\'' +
                 ", year='" + year + '\'' +
-                ", name=" + name +
-                ", enrollmentCount='" + enrollmentCount + '\'' +
-                ", majorEnrollmentCount='" + majorEnrollmentCount + '\'' +
-                ", subject='" + subjects + '\'' +
-                ", retestSubject='" + retestSubjects + '\'' +
+                ", name='" + name + '\'' +
+                ", code=" + code +
+                ", schoolName='" + schoolName + '\'' +
+                ", enrollmentCount=" + enrollmentCount +
+                ", majorEnrollmentCount=" + majorEnrollmentCount +
+                ", subjects='" + subjects + '\'' +
+                ", retestSubjects='" + retestSubjects + '\'' +
                 ", lastAdmissionLine='" + lastAdmissionLine + '\'' +
                 '}';
     }

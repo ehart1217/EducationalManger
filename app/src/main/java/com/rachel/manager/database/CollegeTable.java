@@ -1,5 +1,6 @@
 package com.rachel.manager.database;
 
+import com.litesuits.orm.db.annotation.Ignore;
 import com.litesuits.orm.db.annotation.Mapping;
 import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 @Table("college_table")
 public class CollegeTable extends BaseTable {
 
+    @Ignore
     static final long serialVersionUID =0L;
 
     @Unique
@@ -24,12 +26,16 @@ public class CollegeTable extends BaseTable {
     @NotNull
     private String name;//院名称
 
+    @NotNull
+    private String schoolName;
+
     @Mapping(Relation.OneToMany)
     private ArrayList<MajorTable> majors;//专业
 
-    public CollegeTable(int collegeId, String name) {
+    public CollegeTable(int collegeId, String name, String schoolName) {
         this.collegeId = collegeId;
         this.name = name;
+        this.schoolName = schoolName;
     }
 
     public long getCollegeId() {
@@ -56,11 +62,20 @@ public class CollegeTable extends BaseTable {
         this.majors = majors;
     }
 
+    public String getSchoolName() {
+        return schoolName;
+    }
+
+    public void setSchoolName(String schoolName) {
+        this.schoolName = schoolName;
+    }
+
     @Override
     public String toString() {
         return "CollegeTable{" +
                 "collegeId=" + collegeId +
                 ", name='" + name + '\'' +
+                ", schoolName='" + schoolName + '\'' +
                 ", majors=" + majors +
                 '}';
     }

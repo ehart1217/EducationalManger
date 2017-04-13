@@ -23,9 +23,12 @@ public class SchoolTable extends BaseTable{
     public static final String COL_985 = "is985";
     @Ignore
     public static final String COL_AREA = "area";
+    @Ignore
+    public static final String COL_NAME = "name";
 
     @NotNull
     @Unique
+    @Column(COL_NAME)
     private String name;//学校名称
     private String detailLink;//百科
     private String desc;
