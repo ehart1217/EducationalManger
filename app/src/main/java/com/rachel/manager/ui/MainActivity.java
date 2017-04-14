@@ -6,6 +6,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -149,6 +150,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             mPopupWindow.setContentView(contentView);
         }
         mPopupWindow.showAsDropDown(mFilterBtn);
+        mPopupWindow.update(mFilterBtn, 0, 0, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
     }
 
     private void afterFilter() {
