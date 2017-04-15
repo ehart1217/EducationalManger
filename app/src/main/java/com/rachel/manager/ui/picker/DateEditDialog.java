@@ -13,8 +13,6 @@ import android.view.View;
 
 import com.rachel.manager.R;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -30,9 +28,6 @@ public class DateEditDialog extends BaseEditDialog implements View.OnClickListen
     private final static int SP_TEXT_SIZE_DEFAULT = 18;
     private final static String DEFAULT_SELECT_YEAR = "1990";
     private final WheelView mYearWheelView;
-    private final WheelView mMonthWheelView;
-    private final List<String> mYears;
-    private final List<String> mMonths;
 
     public DateEditDialog(Context context) {
         super(context);
@@ -40,52 +35,39 @@ public class DateEditDialog extends BaseEditDialog implements View.OnClickListen
         mDialog.setContentView(R.layout.dialog_edit_date);
 
         mYearWheelView = (WheelView) mDialog.findViewById(R.id.dialog_edit_date_year);
-        mMonthWheelView = (WheelView) mDialog.findViewById(R.id.dialog_edit_date_month);
 
         View okBtn = mDialog.findViewById(R.id.dialog_common_bottom_ok_btn);
         View cancelBtn = mDialog.findViewById(R.id.dialog_edit_common_bottom_btn);
         okBtn.setOnClickListener(this);
         cancelBtn.setOnClickListener(this);
-
-        mYears = new ArrayList<>();
-        Calendar calendar = Calendar.getInstance();
-        int thisYear = calendar.get(Calendar.YEAR);
-        for (int i = BEGIN_YEAR; i <= thisYear; i++) {
-            mYears.add(String.valueOf(i));
-        }
-        initWheelView(mYearWheelView, mYears, DEFAULT_SELECT_YEAR);
-
-        mMonths = new ArrayList<>();
-        for (int i = 0; i < 12; i++) {
-            mMonths.add(String.valueOf(i + 1));
-        }
-        initWheelView(mMonthWheelView, mMonths, mMonths.get(0));
     }
 
     /**
      * 设置默认的年月
-     *
-     * @param year  年
-     * @param month 月
      */
-    public void setDefaultDate(String year, String month) {
-        if (mYears.contains(year)) {
-            mYearWheelView.setSelectedItem(year);
-        }
-        if (mMonths.contains(month)) {
-            mMonthWheelView.setSelectedItem(month);
-        }
+    public void setData(List<String> yearList, String defaultYear) {
+        initWheelView(mYearWheelView, yearList, defaultYear);
     }
 
     private void initWheelView(WheelView wheelView, List<String> dataList, String selectData) {
-        int colorSecond = mContext.getResources().getColor(R.color.gray);
-        int colorPrimary = mContext.getResources().getColor(R.color.primary);
+
+        if (dataList == null || dataList.size() == 0) {
+            return;
+        }
+
+        int colorSecond = mContext.getResources().getColor(R.color.white_80);
+        int colorPrimary = mContext.getResources().getColor(R.color.white);
         wheelView.setTextColor(colorSecond, colorPrimary);
         wheelView.setTextSize(SP_TEXT_SIZE_DEFAULT);
 
         WheelView.LineConfig lineConfig = new WheelView.LineConfig();
-        lineConfig.setColor(Color.BLACK);
+        lineConfig.setColor(Color.WHITE);
         wheelView.setLineConfig(lineConfig);
+        wheelView.setCycleDisable(false);
+
+        if (!dataList.contains(selectData)) {
+            selectData = dataList.get(0);
+        }
 
         wheelView.setItems(dataList, selectData);
     }
@@ -98,8 +80,7 @@ public class DateEditDialog extends BaseEditDialog implements View.OnClickListen
             mDialog.dismiss();
             if (mOnEditResult != null) {
                 String year = mYearWheelView.getSelectedItem();
-                String month = mMonthWheelView.getSelectedItem();
-                mOnEditResult.onResult(year, month);
+                mOnEditResult.onResult(year);
             }
         } else if (id == R.id.dialog_edit_common_bottom_btn) {
             // cancel

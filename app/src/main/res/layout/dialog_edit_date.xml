@@ -2,53 +2,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:layout_margin="@dimen/margin_middle"
     android:background="@color/bg_dlg"
-    android:orientation="vertical"
-    android:padding="@dimen/padding_small">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginBottom="@dimen/margin_middle"
         android:layout_marginLeft="@dimen/margin_xlarge"
         android:layout_marginRight="@dimen/margin_xlarge"
         android:layout_weight="1"
+        android:gravity="center"
+        android:padding="@dimen/padding_middle"
         android:orientation="horizontal">
 
-        <com.android.jv.ink.launcherink.ui.customview.WheelView
+        <com.rachel.manager.ui.picker.WheelView
             android:id="@+id/dialog_edit_date_year"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_weight="1.8"/>
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center" />
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="1"
             android:gravity="center"
-            android:textColor="@color/primary"
+            android:text="年份"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
-
-        <com.android.jv.ink.launcherink.ui.customview.WheelView
-            android:id="@+id/dialog_edit_date_month"
-            android:layout_width="0dp"
-            android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:layout_weight="1.8" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/primary"
-            android:textSize="18sp" />
     </LinearLayout>
+
+    <include layout="@layout/divider_horizontal_gray_px" />
 
     <include layout="@layout/common_dialog_bottom" />
 

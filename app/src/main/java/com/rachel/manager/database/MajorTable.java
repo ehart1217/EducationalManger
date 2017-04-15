@@ -34,11 +34,11 @@ public class MajorTable extends BaseTable {
     private String retestSubjects;//复试科目
     private String lastAdmissionLine;//去年录取线
 
-    public MajorTable(String year, String name, long code, String schoolName) {
+    public MajorTable(String year, String name, long collegeId, String schoolName) {
+        code = (year + name + collegeId).hashCode() % 1000000;
         this.majorId = year + code;
         this.year = year;
         this.name = name;
-        this.code = code;
         this.schoolName = schoolName;
     }
 

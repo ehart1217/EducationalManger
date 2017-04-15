@@ -32,8 +32,20 @@
         android:gravity="center"
         android:paddingLeft="@dimen/padding_middle_large"
         android:paddingRight="@dimen/padding_middle_large"
+        android:text="详情"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/common_function_with_drawable_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center_vertical"
+        android:drawableRight="@drawable/icon_arrow_down_16"
+        android:gravity="center"
+        android:paddingLeft="@dimen/padding_middle_large"
+        android:paddingRight="@dimen/padding_middle_large"
+        android:text="2017"
         android:visibility="gone"
-        test:visibility="visible"
-        android:text="详情"/>
+        test:visibility="visible" />
 
 </FrameLayout>

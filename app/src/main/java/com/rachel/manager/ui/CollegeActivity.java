@@ -3,6 +3,8 @@ package com.rachel.manager.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -12,8 +14,10 @@ import com.rachel.manager.base.BaseActivity;
 import com.rachel.manager.database.CollegeTable;
 import com.rachel.manager.database.MajorTable;
 import com.rachel.manager.database.SchoolTable;
-import com.rachel.manager.ui.adapter.SelectAdapter;
 import com.rachel.manager.ui.adapter.MajorAdapter;
+import com.rachel.manager.ui.adapter.SelectAdapter;
+import com.rachel.manager.ui.picker.BaseEditDialog;
+import com.rachel.manager.ui.picker.DateEditDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +38,11 @@ public class CollegeActivity extends BaseActivity {
     private SelectAdapter mCollegeAdapter;
     private MajorAdapter mMajorAdapter;
     private List<CollegeTable> mCollegeTableList;
+    private List<String> mYearList = new ArrayList<>();
+
+    private String mSelectedYear = "";
+    private DateEditDialog mDialog;
+    private CollegeTable mCurrentCollege;
 
     public static void start(Context context, SchoolTable schoolTable) {
         Intent starter = new Intent(context, CollegeActivity.class);
@@ -47,9 +56,8 @@ public class CollegeActivity extends BaseActivity {
         if (mSchoolTable == null) {
             throw new IllegalArgumentException("school table cannot be null!");
         }
-
-        setContentView(R.layout.activity_college_list);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_college_list);
         findView();
         initData();
         addListener();
@@ -66,16 +74,13 @@ public class CollegeActivity extends BaseActivity {
     protected void addListener() {
         super.addListener();
         mCollegeLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // 学院item被点击
                 mCollegeAdapter.setSelectedIndex(position);
-
-                List<MajorTable> majorTables = mCollegeTableList.get(position).getMajors();
-                if (majorTables == null) {
-                    majorTables = new ArrayList<>();
-                }
-                mMajorAdapter.update(majorTables);
+                mCurrentCollege = mCollegeTableList.get(position);
+                updateView(mSelectedYear);
             }
         });
 
@@ -87,12 +92,22 @@ public class CollegeActivity extends BaseActivity {
                 MajorDetailActivity.start(CollegeActivity.this, majorTable.getId(), mSchoolTable.getId());
             }
         });
+
+        mFunctionTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String year = mFunctionTv.getText().toString();
+                showChooseYearDialog(year);
+            }
+        });
     }
 
     @Override
     protected void initData() {
         super.initData();
+        // 标题
         setTitle(mSchoolTable.getName());
+
         mCollegeTableList = mSchoolTable.getColleges();
         if (mCollegeTableList == null) {
             mCollegeTableList = new ArrayList<>();
@@ -101,13 +116,19 @@ public class CollegeActivity extends BaseActivity {
         mCollegeLv.setAdapter(mCollegeAdapter);
 
         List<MajorTable> majorTableList;
+
         if (mCollegeTableList.isEmpty()) {
             majorTableList = new ArrayList<>();
         } else {
-            majorTableList = mCollegeTableList.get(0).getMajors();
-        }
-        if (majorTableList == null) {
-            majorTableList = new ArrayList<>();
+            mCurrentCollege = mCollegeTableList.get(0);
+            mYearList.addAll(mCurrentCollege.getYearList());
+            if (mYearList.isEmpty()) {
+                majorTableList = new ArrayList<>();
+            } else {
+                String year = mYearList.get(0);
+                setFunctionWithArrow(year + "年");
+                majorTableList = mCurrentCollege.getMajorByYear(mYearList.get(0));
+            }
         }
         mMajorAdapter = new MajorAdapter(this, majorTableList);
         mMajorLv.setAdapter(mMajorAdapter);
@@ -119,5 +140,37 @@ public class CollegeActivity extends BaseActivity {
             nameList.add(collegeTable.getName());
         }
         return nameList;
+    }
+
+    private void showChooseYearDialog(String defaultYear) {
+        if (mDialog == null) {
+            mDialog = new DateEditDialog(CollegeActivity.this);
+            mDialog.setOnEditResult(new BaseEditDialog.OnEditResult() {
+                @Override
+                public void onResult(@NonNull Object... results) {
+                    if (results.length == 0) {
+                        return;
+                    }
+                    mSelectedYear = (String) results[0];
+                    updateView(mSelectedYear);
+                }
+            });
+        }
+        mDialog.setData(mYearList, defaultYear);
+        mDialog.show();
+    }
+
+    private void updateView(String year) {
+        mYearList.clear();
+        mYearList.addAll(mCurrentCollege.getYearList());
+
+        if (mYearList.size() > 0) {
+            if (TextUtils.isEmpty(year) || !mYearList.contains(year)) {
+                year = mYearList.get(0);
+            }
+        }
+        setFunctionWithArrow(year + "年");
+        List<MajorTable> majorTables = mCurrentCollege.getMajorByYear(year);
+        mMajorAdapter.update(majorTables);
     }
 }

@@ -82,7 +82,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             mPswEt.setText(rawPsw);
         }
 
-        DataBaseManager.getDateBase(this).setDebugged(true);
+        DataBaseManager.init(this).setDebugged(true);
 //        DataGenerator.cleanData(this);
 //        DataGenerator.createData(this);
         DataGenerator.checkData(this);
@@ -147,7 +147,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         }
 
         // 得到加密后的账号密码
-        LiteOrm liteOrm = DataBaseManager.getDateBase(this);
+        LiteOrm liteOrm = DataBaseManager.init(this);
         String realPsw = MD5Utils.encode(rawPsw, MD5Utils.SALT);
 
         // 查询数据库

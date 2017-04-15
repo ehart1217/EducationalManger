@@ -20,11 +20,15 @@ public class DataBaseManager {
 
     private static LiteOrm mLiteOrm;
 
-    public static LiteOrm getDateBase(Context context) {
+    public static LiteOrm init(Context context) {
         if (mLiteOrm == null) {
             mLiteOrm = LiteOrm.newCascadeInstance(context, DATA_BASE_NAME);
             mLiteOrm.setDebugged(true);
         }
+        return mLiteOrm;
+    }
+
+    public static LiteOrm getLiteOrm() {
         return mLiteOrm;
     }
 

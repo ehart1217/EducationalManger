@@ -59,6 +59,19 @@ public class BaseActivity extends Activity {
     }
 
     protected void setFunction(String function) {
+        mFunctionTv = (TextView) findViewById(R.id.common_function_tv);
+        if (mFunctionTv != null) {
+            if (TextUtils.isEmpty(function)) {
+                mFunctionTv.setVisibility(View.GONE);
+            } else {
+                mFunctionTv.setVisibility(View.VISIBLE);
+                mFunctionTv.setText(function);
+            }
+        }
+    }
+
+    protected void setFunctionWithArrow(String function) {
+        mFunctionTv = (TextView) findViewById(R.id.common_function_with_drawable_tv);
         if (mFunctionTv != null) {
             if (TextUtils.isEmpty(function)) {
                 mFunctionTv.setVisibility(View.GONE);
