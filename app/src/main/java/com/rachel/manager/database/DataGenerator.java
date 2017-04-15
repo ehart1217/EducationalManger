@@ -284,7 +284,7 @@ public class DataGenerator {
         return tables;
     }
 
-    private static void saveSchoolDeep(SchoolTable schoolTable) {
+    public static void saveSchoolDeep(SchoolTable schoolTable) {
         LiteOrm liteOrm = DataBaseManager.getLiteOrm();
 
         List<CollegeTable> collegeTableList = schoolTable.getColleges();

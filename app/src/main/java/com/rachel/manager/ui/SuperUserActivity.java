@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
 import com.rachel.manager.database.DataGenerator;
+import com.rachel.manager.database.RealSchoolGenerator;
 
 /**
  * 超级用户页面
@@ -52,6 +53,7 @@ public class SuperUserActivity extends BaseActivity implements View.OnClickListe
         switch (id) {
             case R.id.activity_super_user_create_btn:
                 DataGenerator.createData(this);
+                RealSchoolGenerator.createSchool();
                 Toast.makeText(this, "create data", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.activity_super_user_delete_btn:
