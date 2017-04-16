@@ -1,6 +1,7 @@
 package com.rachel.manager.database;
 
 import com.litesuits.orm.db.annotation.Column;
+import com.litesuits.orm.db.annotation.Ignore;
 import com.litesuits.orm.db.annotation.NotNull;
 import com.litesuits.orm.db.annotation.Table;
 import com.litesuits.orm.db.annotation.Unique;
@@ -13,7 +14,12 @@ import com.litesuits.orm.db.annotation.Unique;
 public class MajorTable extends BaseTable {
 
     @NotNull
+    @Ignore
     public final static String COL_MAJOR_NAME = "name";
+
+    @NotNull
+    @Ignore
+    public final static String COL_SUBJECTS = "subjects";
 
     @Unique
     @NotNull
@@ -30,6 +36,7 @@ public class MajorTable extends BaseTable {
 
     private int enrollmentCount;//院招生人数
     private int majorEnrollmentCount;//专业招生人数
+    @Column(COL_SUBJECTS)
     private String subjects;//考试科目
     private String retestSubjects;//复试科目
     private String lastAdmissionLine;//去年录取线

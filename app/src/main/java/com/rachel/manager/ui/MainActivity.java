@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 
@@ -36,6 +40,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private final static int REQUEST_CODE_AREA = 1;
     private final static int REQUEST_CODE_MAJOR = 2;
+    private EditText mSearchEt;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
@@ -59,6 +64,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMeBtn = findViewById(R.id.activity_main_me_btn);
         mRankBtn = findViewById(R.id.activity_main_rank_btn);
         mFilterBtn = findViewById(R.id.activity_main_filter_btn);
+        mSearchEt = (EditText) findViewById(R.id.activity_main_search_et);
     }
 
     @Override
@@ -82,6 +88,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mFilterBtn.setOnTouchListener(new OnTouchEffectedListener());
 
         mSchoolLv.setOnItemClickListener(this);
+
+        mSearchEt.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(TextUtils.isEmpty(s)){
+                    updateSchool(DataBaseManager.queryAllSchool());
+                } else{
+                    updateSchool(DataBaseManager.querySchoolBySubject(s.toString()));
+                }
+            }
+        });
     }
 
     @Override
@@ -176,7 +203,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 updateSchool(DataBaseManager.querySchoolByArea(area));
             } else if (requestCode == REQUEST_CODE_MAJOR) {
                 String major = data.getStringExtra(FilterConditionActivity.KEY_FILTER_CONTENT);
-                updateSchool(DataBaseManager.querSchoolByMajor(major));
+                updateSchool(DataBaseManager.querySchoolByMajor(major));
             }
             afterFilter();
         }

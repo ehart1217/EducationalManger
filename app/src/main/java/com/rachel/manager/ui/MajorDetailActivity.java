@@ -198,7 +198,7 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
 
     private boolean canEdit(){
         UserTable userTable = DataBaseManager.getCurrentUser();
-        return userTable.getRole() == UserTable.ROLE_MANAGER && userTable.getSchool() != null && userTable.getSchool().getId() == mSchoolId;
+        return userTable.getRole() == UserTable.ROLE_MANAGER;
     }
 
 }

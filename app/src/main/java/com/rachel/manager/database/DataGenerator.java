@@ -34,87 +34,45 @@ public class DataGenerator {
         UserTable userTable2 = new UserTable("222222", psw2, 1);
         userTable2.setName("Rachel");
 
-        List<SchoolTable> schoolTableList = DataGenerator.generateSchool();
-        List<CollegeTable> toSaveCollegeTable = new ArrayList<>();
-        List<MajorTable> toSaveMajor = new ArrayList<>();
-
-
-        for (SchoolTable schoolTable : schoolTableList) {
-
-            ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName());
-            for (CollegeTable collegeTable : collegeTableList) {
-                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的软件工程", collegeTable.getCollegeId(), schoolTable.getName());
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的建筑设计", collegeTable.getCollegeId(), schoolTable.getName()));
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的会计学", collegeTable.getCollegeId(), schoolTable.getName()));
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的临床医学", collegeTable.getCollegeId(), schoolTable.getName()));
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的信息工程", collegeTable.getCollegeId(), schoolTable.getName()));
-                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的哈哈哈", collegeTable.getCollegeId(), schoolTable.getName()));
-                collegeTable.setMajors(majorTableList);
-//                liteOrm.save(majorTableList);
-                toSaveMajor.addAll(majorTableList);
-            }
-            schoolTable.setAdvantages(getRandomAdvantages(collegeTableList));
-            schoolTable.setColleges(collegeTableList);
-            toSaveCollegeTable.addAll(collegeTableList);
-
-            if ("辽宁大学".equals(schoolTable.getName())) {
-                userTable2.setSchool(schoolTable);
-            }
-        }
-        liteOrm.save(toSaveMajor);
-        liteOrm.save(toSaveCollegeTable);
-        liteOrm.save(schoolTableList);
-
         liteOrm.save(userTable2);
         liteOrm.save(userTable);
-
-        liteOrm.save(generateRankTable());
+//
+//        List<SchoolTable> schoolTableList = DataGenerator.generateSchool();
+//        List<CollegeTable> toSaveCollegeTable = new ArrayList<>();
+//        List<MajorTable> toSaveMajor = new ArrayList<>();
+//
+//
+//        for (SchoolTable schoolTable : schoolTableList) {
+//
+//            ArrayList<CollegeTable> collegeTableList = DataGenerator.generateCollegeTables(schoolTable.getName());
+//            for (CollegeTable collegeTable : collegeTableList) {
+//                ArrayList<MajorTable> majorTableList = DataGenerator.generateMajors(collegeTable.getName() + "的软件工程", collegeTable.getCollegeId(), schoolTable.getName());
+//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的建筑设计", collegeTable.getCollegeId(), schoolTable.getName()));
+//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的会计学", collegeTable.getCollegeId(), schoolTable.getName()));
+//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的临床医学", collegeTable.getCollegeId(), schoolTable.getName()));
+//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的信息工程", collegeTable.getCollegeId(), schoolTable.getName()));
+//                majorTableList.addAll(DataGenerator.generateMajors(collegeTable.getName() + "的哈哈哈", collegeTable.getCollegeId(), schoolTable.getName()));
+//                collegeTable.setMajors(majorTableList);
+////                liteOrm.save(majorTableList);
+//                toSaveMajor.addAll(majorTableList);
+//            }
+//            schoolTable.setAdvantages(getRandomAdvantages(collegeTableList));
+//            schoolTable.setColleges(collegeTableList);
+//            toSaveCollegeTable.addAll(collegeTableList);
+//
+//            if ("辽宁大学".equals(schoolTable.getName())) {
+//                userTable2.setSchool(schoolTable);
+//            }
+//        }
+//        liteOrm.save(toSaveMajor);
+//        liteOrm.save(toSaveCollegeTable);
+//        liteOrm.save(schoolTableList);
+//
+//        liteOrm.save(userTable2);
+//        liteOrm.save(userTable);
+//
+//        liteOrm.save(generateRankTable());
     }
-
-//    public static void createCustomSchools() {
-//        // ************学校基本信息*************
-//        SchoolTable schoolTable = new SchoolTable("test1");
-//        schoolTable.setAdvantages("youshi1,youshi2");
-//        schoolTable.setArea("diqu");
-//        // 可以继续设置学校的其他信息:schoolTable.set.....
-//
-//
-//        // ************学院************
-//        // 学院列表
-//        List<CollegeTable> collegeTableList = new ArrayList<>();
-//        // 学院1
-//        CollegeTable collegeTable1 = new CollegeTable("学院1", schoolTable.getName());
-//
-//        //              ***** 学院1的专业
-//        ArrayList<MajorTable> majorTableList1 = new ArrayList<>();
-//
-//        // 学院1的专业1 2017年的
-//        MajorTable majorTable11_2017 = new MajorTable("2017", "学院1的专业1", collegeTable1.getCollegeId(), schoolTable.getName());
-//        //设置课程
-//        majorTable11_2017.setSubjects("课程1\n课程2\n课程3\n课程4");// “\n”是换行的意思
-//        majorTable11_2017.setRetestSubjects("复试课程1\n复试课程2");
-//
-//        // 学院1的专业1 2016年的
-//        MajorTable majorTable11_2016 = new MajorTable("2016", "学院1的专业1", collegeTable1.getCollegeId(), schoolTable.getName());
-//        //设置课程
-//        majorTable11_2016.setSubjects("课程1\n课程2\n课程3\n课程4");// “\n”是换行的意思
-//        majorTable11_2016.setRetestSubjects("复试课程1\n复试课程2");
-//
-//        // 学院1的专业2 2017年的
-//        MajorTable majorTable1 = new MajorTable("2017", "学院1的专业2", collegeTable1.getCollegeId(), schoolTable.getName());
-//        //设置课程
-//        majorTable1.setSubjects("课程1\n课程2\n课程3\n课程4");// “\n”是换行的意思
-//        majorTable1.setRetestSubjects("复试课程1\n复试课程2");
-//
-//        // 学院1的专业2 2016年的
-//        MajorTable majorTable12 = new MajorTable("2016", "学院1的专业2", collegeTable1.getCollegeId(), schoolTable.getName());
-//        //设置课程
-//        majorTable1.setSubjects("课程1\n课程2\n课程3\n课程4");// “\n”是换行的意思
-//        majorTable1.setRetestSubjects("复试课程1\n复试课程2");
-//
-//        // 把专业设置到学院中去
-//        collegeTable1.setMajors(majorTableList1);
-//    }
 
     public static String checkData(Context context) {
         LiteOrm liteOrm = DataBaseManager.init(context);
@@ -269,11 +227,11 @@ public class DataGenerator {
     }
 
     private static ArrayList<RankTable> generateRankTable() {
-        RankTable rankTable1 = new RankTable("生物专业", "1.辽宁大学\n2.清华大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n");
-        RankTable rankTable2 = new RankTable("化学专业", "1.辽宁大学\n2.清华大学\n3.北京大学\n4.野鸡大学\n5.负担大学\n6.华中科技大学");
-        RankTable rankTable3 = new RankTable("计算机专业", "1.辽宁大学\n2.华中科技大学\n3.北京大学\n4.负担大学\n5.野鸡大学\n6.清华大学");
-        RankTable rankTable4 = new RankTable("物理专业", "1.辽宁大学\n2.野鸡大学\n3.北京大学\n4.负担大学\n5.清華大学\n6.华中科技大学");
-        RankTable rankTable5 = new RankTable("会计专业", "1.辽宁大学\n2.清华大学\n3.厦门大学\n4.负担大学\n5.野鸡大学\n6.华中科技大学");
+        RankTable rankTable1 = new RankTable("生物专业", "1.中山大学\n2.复旦大学\n3.武汉大学\n4.北京大学\n5.中国科学技术大学\n");
+        RankTable rankTable2 = new RankTable("化学专业", "1.北京大学\n2.中国科学院大学\n3.南开大学\n4.复旦大学\n5.南京大学\n");
+        RankTable rankTable3 = new RankTable("计算机专业", "1.清华大学\n2.国防科学技术大学\n3.北京大学\n4.北京航空航天大学\n5.哈尔滨工业大学\n");
+        RankTable rankTable4 = new RankTable("物理专业", "1.北京大学\n2.复旦大学\n3.清华大学\n4.中国科学技术大学\n5.南京大学\n");
+        RankTable rankTable5 = new RankTable("会计专业", "1.厦门大学\n2.上海财经大学\n3.人民大学\n4.中南财经政法大学\n5.东北财经大学\n");
 
         ArrayList<RankTable> tables = new ArrayList<>();
         tables.add(rankTable1);

@@ -126,6 +126,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.activity_login_find_password_tv:
                 break;
             case R.id.activity_login_new_user_tv:
+
                 break;
             case R.id.activity_login_remember_psw:
                 mRememberPsw.setSelected(!mRememberPsw.isSelected());

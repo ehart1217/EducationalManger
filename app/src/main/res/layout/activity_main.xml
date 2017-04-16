@@ -72,6 +72,36 @@
 
     <include layout="@layout/divider_horizontal_px" />
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginLeft="@dimen/margin_small"
+        android:layout_marginRight="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_small">
+
+        <EditText
+            android:id="@+id/activity_main_search_et"
+            android:layout_height="48dp"
+            android:layout_width="match_parent"
+            android:hint="模糊搜索专业课程"
+            android:textSize="15sp"
+            android:textColorHint="@color/font_gray"
+            android:textColor="@color/font_main"
+            android:inputType="text"
+            android:paddingLeft="45dp"
+            android:background="@drawable/shape_search"/>
+        <ImageView
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginLeft="@dimen/margin_small"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/icon_search"/>
+    </FrameLayout>
+
+
+    <include layout="@layout/divider_horizontal_px"/>
+
     <ListView
         android:id="@+id/activity_main_lv"
         android:layout_width="match_parent"

@@ -57,23 +57,22 @@ public class DataBaseManager {
         return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
     }
 
-    public static List<SchoolTable> querSchoolByMajor(String major) {
+    public static List<SchoolTable> querySchoolBySubject(String subject) {
+        ArrayList<MajorTable> majorTables = mLiteOrm.query(new QueryBuilder<>(MajorTable.class)
+                .where(MajorTable.COL_SUBJECTS + " like  '%" + subject + "%'"));
+        if (majorTables == null) {
+            return new ArrayList<>();
+        }
+        return querySchoolByMajorList(majorTables);
+    }
+
+    public static List<SchoolTable> querySchoolByMajor(String major) {
         ArrayList<MajorTable> majorTables = mLiteOrm.query(new QueryBuilder<>(MajorTable.class)
                 .where(MajorTable.COL_MAJOR_NAME + " = ?", major));
         if (majorTables == null) {
             return new ArrayList<>();
         }
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append('(');
-        for (MajorTable majorTable : majorTables) {
-            stringBuilder.append('\'').append(majorTable.getSchoolName()).append('\'').append(',');
-        }
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        stringBuilder.append(')');
-
-        ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
-                .where(SchoolTable.COL_NAME + " IN " + stringBuilder.toString()));
-        return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
+        return querySchoolByMajorList(majorTables);
     }
 
     @NonNull
@@ -136,5 +135,22 @@ public class DataBaseManager {
         int id = userTable.getId();
         userTable = mLiteOrm.queryById(id, UserTable.class);
         UserCache.init(userTable);
+    }
+
+    private static List<SchoolTable> querySchoolByMajorList(ArrayList<MajorTable> majorTables) {
+        if (majorTables == null || majorTables.size() == 0) {
+            return new ArrayList<>();
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append('(');
+        for (MajorTable majorTable : majorTables) {
+            stringBuilder.append('\'').append(majorTable.getSchoolName()).append('\'').append(',');
+        }
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        stringBuilder.append(')');
+
+        ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
+                .where(SchoolTable.COL_NAME + " IN " + stringBuilder.toString()));
+        return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
     }
 }
