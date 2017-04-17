@@ -123,7 +123,6 @@ public class DataBaseManager {
 
     public static void update(Object o) {
         mLiteOrm.update(o);
-        updateCache();
     }
 
     public static <T> T queryById(long id, Class<T> tClass) {
@@ -135,6 +134,20 @@ public class DataBaseManager {
         int id = userTable.getId();
         userTable = mLiteOrm.queryById(id, UserTable.class);
         UserCache.init(userTable);
+    }
+
+    public static boolean checkUserDuplicate(String userName) {
+        UserTable result = queryUserByUserName(userName);
+        return result != null;
+    }
+
+    public static UserTable queryUserByUserName(String userName) {
+        List<UserTable> userTables = mLiteOrm.query(new QueryBuilder<>(UserTable.class)
+                .where(UserTable.COL_USER_NAME + "=" + userName));
+        if(userTables != null && userTables.size() > 0){
+            return userTables.get(0);
+        }
+        return null;
     }
 
     private static List<SchoolTable> querySchoolByMajorList(ArrayList<MajorTable> majorTables) {
@@ -152,5 +165,9 @@ public class DataBaseManager {
         ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
                 .where(SchoolTable.COL_NAME + " IN " + stringBuilder.toString()));
         return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
+    }
+
+    public static void newUser(UserTable userTable) {
+        mLiteOrm.save(userTable);
     }
 }

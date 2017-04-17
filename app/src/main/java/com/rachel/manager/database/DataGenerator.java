@@ -36,6 +36,9 @@ public class DataGenerator {
 
         liteOrm.save(userTable2);
         liteOrm.save(userTable);
+
+        liteOrm.save(generateRankTable());
+
 //
 //        List<SchoolTable> schoolTableList = DataGenerator.generateSchool();
 //        List<CollegeTable> toSaveCollegeTable = new ArrayList<>();

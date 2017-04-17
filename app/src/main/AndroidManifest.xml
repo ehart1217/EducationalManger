@@ -31,6 +31,8 @@
         <activity android:name=".ui.MeActivity" />
         <activity android:name=".ui.RankActivity" />
         <activity android:name=".ui.FilterConditionActivity" />
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.FindPasswordActivity" />
     </application>
 
 </manifest>

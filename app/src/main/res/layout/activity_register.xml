@@ -2,23 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/item_height_x_xlarge"
-        android:gravity="center"
-        android:text="酷酷的研究院校查询系统欢迎您"
-        android:textColor="@color/font_main"
-        android:textSize="@dimen/font_size_x_xlarge" />
+    <include layout="@layout/common_title_layout" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/font_main"
-        android:textSize="@dimen/font_size_xlarge" />
+    <include
+        layout="@layout/divider_horizontal_dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -44,9 +33,9 @@
                 android:src="@drawable/icon_user_name" />
 
             <EditText
-                android:id="@+id/activity_login_name_et"
+                android:id="@+id/activity_register_user_name_et"
                 style="@style/activity_login_input_edit_text_style"
-                android:hint="用户名"
+                android:hint="输入用户名"
                 android:inputType="text"
                 android:maxEms="11"
                 android:maxLength="11" />
@@ -74,9 +63,9 @@
                 android:src="@drawable/icon_psw" />
 
             <EditText
-                android:id="@+id/activity_login_password_et"
+                android:id="@+id/activity_register_password_et"
                 style="@style/activity_login_input_edit_text_style"
-                android:hint="密码"
+                android:hint="输入密码"
                 android:inputType="textPassword"
                 android:maxEms="11"
                 android:maxLength="11" />
@@ -87,60 +76,74 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/activity_login_btn"
-            style="@style/activity_login_register_btn_style"
-            android:enabled="false"
-            android:text="登录" />
+        android:layout_margin="@dimen/activity_margin_left_right"
+        android:background="@drawable/shape_white_bg"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_margin_left_right"
+        android:paddingRight="@dimen/activity_margin_left_right">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/activity_login_remember_psw"
-                android:layout_width="15dp"
-                android:layout_height="15dp"
-                android:layout_marginLeft="@dimen/margin_x_small"
-                android:src="@drawable/checkbox_circle_red" />
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:src="@drawable/icon_name" />
+
+            <EditText
+                android:id="@+id/activity_register_nickname_et"
+                style="@style/activity_login_input_edit_text_style"
+                android:hint="输入昵称"
+                android:inputType="text"
+                android:maxEms="11"
+                android:maxLength="11" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="40dp"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="@dimen/margin_small"
+                android:layout_marginRight="@dimen/margin_small"
+                android:src="@drawable/user_role" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/icon_arrow_down_16" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_x_x_small"
-                android:text="记住密码"
-                android:textSize="12sp" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/activity_login_new_user_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="注册"
-                android:textColor="@color/font_new_user"
-                android:textSize="@dimen/font_size_middle"
-                android:visibility="visible" />
-
-            <TextView
-                android:id="@+id/activity_login_find_password_tv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginLeft="@dimen/margin_middle"
-                android:text="找回密码"
-                android:textSize="@dimen/font_size_middle" />
-
+                android:id="@+id/activity_register_role_tv"
+                style="@style/activity_login_input_edit_text_style"
+                android:text="学生" />
         </LinearLayout>
 
     </LinearLayout>
+
+
+    <Button
+        android:id="@+id/activity_register_commit_btn"
+        style="@style/activity_login_register_btn_style"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="注册" />
 
 </LinearLayout>

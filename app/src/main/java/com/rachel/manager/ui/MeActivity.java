@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.rachel.manager.R;
 import com.rachel.manager.base.BaseActivity;
 import com.rachel.manager.database.DataBaseManager;
-import com.rachel.manager.database.SchoolTable;
 import com.rachel.manager.database.UserTable;
 
 /**
@@ -20,8 +19,6 @@ import com.rachel.manager.database.UserTable;
 public class MeActivity extends BaseActivity implements View.OnClickListener {
 
     private TextView mNameTv;
-    private View mSchoolContainer;
-    private TextView mSchoolTv;
     private TextView mRightTv;
     private View mLogoutBtn;
     private UserTable mUserTable;
@@ -44,8 +41,6 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     protected void findView() {
         super.findView();
         mNameTv = (TextView) findViewById(R.id.activity_me_name_tv);
-        mSchoolContainer = findViewById(R.id.activity_me_school_container);
-        mSchoolTv = (TextView) findViewById(R.id.activity_me_school_tv);
         mRightTv = (TextView) findViewById(R.id.activity_me_right_tv);
         mLogoutBtn = findViewById(R.id.activity_me_logout_btn);
 
@@ -62,15 +57,6 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
         }
         mNameTv.setText(name);
 
-        String schoolName = "";
-        SchoolTable school = mUserTable.getSchool();
-        if (school != null) {
-            if (school.getName() != null) {
-                schoolName = school.getName();
-            }
-        }
-        mSchoolTv.setText(schoolName);
-
         String rightStr;
         int role = mUserTable.getRole();
         if (role == UserTable.ROLE_USER) {
@@ -85,9 +71,6 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
     protected void addListener() {
         super.addListener();
         mLogoutBtn.setOnClickListener(this);
-        if (mUserTable.getSchool() != null) {
-            mSchoolContainer.setOnClickListener(this);
-        }
     }
 
     @Override
@@ -97,8 +80,6 @@ public class MeActivity extends BaseActivity implements View.OnClickListener {
             DataBaseManager.clearUser();
             LoginActivity.start(this);
             this.finish();
-        } else if (id == R.id.activity_me_school_container) {
-            SchoolDetailActivity.start(this, mUserTable.getSchool());
         }
     }
 }

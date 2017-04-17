@@ -18,8 +18,11 @@ public class UserTable extends BaseTable {
     @Ignore
     public static final String COL_PASSWORD = "password";
 
+    @Ignore
     public static final int ROLE_USER = 0;
+    @Ignore
     public static final int ROLE_MANAGER = 1;
+    @Ignore
     public static final int ROLE_SUPER_USER = 2;
 
     @NotNull
@@ -31,8 +34,6 @@ public class UserTable extends BaseTable {
     @Column(COL_PASSWORD)
     private String password; //密码
     private String name = ""; //姓名
-
-    private SchoolTable school; //学校
 
     /**
      * 0，普通用户。1，管理员。2，super User。
@@ -70,14 +71,6 @@ public class UserTable extends BaseTable {
         this.name = name;
     }
 
-    public SchoolTable getSchool() {
-        return school;
-    }
-
-    public void setSchool(SchoolTable school) {
-        this.school = school;
-    }
-
     public int getRole() {
         return role;
     }
@@ -93,7 +86,6 @@ public class UserTable extends BaseTable {
                 ", userName='" + userName + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
-                ", school='" + school + '\'' +
                 ", role=" + role +
                 '}';
     }

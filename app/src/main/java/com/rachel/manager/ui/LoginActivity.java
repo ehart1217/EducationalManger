@@ -124,9 +124,15 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 }
                 break;
             case R.id.activity_login_find_password_tv:
+                String userName = mUserEt.getText().toString();
+                if (TextUtils.isEmpty(userName) || !DataBaseManager.checkUserDuplicate(userName)) {
+                    Toast.makeText(this, "找不到该用户", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                FindPasswordActivity.start(this, userName);
                 break;
             case R.id.activity_login_new_user_tv:
-
+                RegisterActivity.start(this);
                 break;
             case R.id.activity_login_remember_psw:
                 mRememberPsw.setSelected(!mRememberPsw.isSelected());

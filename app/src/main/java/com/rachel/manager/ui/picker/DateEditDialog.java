@@ -9,7 +9,9 @@ package com.rachel.manager.ui.picker;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.rachel.manager.R;
 
@@ -23,6 +25,7 @@ import java.util.List;
  */
 public class DateEditDialog extends BaseEditDialog implements View.OnClickListener {
 
+    private final TextView mDescTv;
     private Context mContext;
     private final static int BEGIN_YEAR = 1940;
     private final static int SP_TEXT_SIZE_DEFAULT = 18;
@@ -35,6 +38,7 @@ public class DateEditDialog extends BaseEditDialog implements View.OnClickListen
         mDialog.setContentView(R.layout.dialog_edit_date);
 
         mYearWheelView = (WheelView) mDialog.findViewById(R.id.dialog_edit_date_year);
+        mDescTv = (TextView) mDialog.findViewById(R.id.dialog_edit_desc_tv);
 
         View okBtn = mDialog.findViewById(R.id.dialog_common_bottom_ok_btn);
         View cancelBtn = mDialog.findViewById(R.id.dialog_edit_common_bottom_btn);
@@ -47,6 +51,16 @@ public class DateEditDialog extends BaseEditDialog implements View.OnClickListen
      */
     public void setData(List<String> yearList, String defaultYear) {
         initWheelView(mYearWheelView, yearList, defaultYear);
+    }
+
+
+    public void setDesc(String desc){
+        if(TextUtils.isEmpty(desc)){
+            mDescTv.setVisibility(View.GONE);
+        }else {
+            mDescTv.setVisibility(View.VISIBLE);
+            mDescTv.setText(desc);
+        }
     }
 
     private void initWheelView(WheelView wheelView, List<String> dataList, String selectData) {
