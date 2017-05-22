@@ -11,7 +11,8 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -240,5 +241,15 @@
                 test:text="哈哈哈哈哈哈哈哈哈哈哈哈" />
         </LinearLayout>
     </ScrollView>
+
+    <include layout="@layout/divider_horizontal_px"/>
+
+    <TextView
+        android:id="@+id/activity_major_comment_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white"
+        android:text="评论"
+        android:gravity="center"/>
 
 </LinearLayout>

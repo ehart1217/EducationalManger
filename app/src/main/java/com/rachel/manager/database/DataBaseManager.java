@@ -125,7 +125,14 @@ public class DataBaseManager {
         mLiteOrm.update(o);
     }
 
+    public static void insert(Object o){
+        mLiteOrm.insert(o);
+    }
+
     public static <T> T queryById(long id, Class<T> tClass) {
+        if(mLiteOrm == null){
+            return null;
+        }
         return mLiteOrm.queryById(id, tClass);
     }
 
@@ -165,6 +172,16 @@ public class DataBaseManager {
         ArrayList<SchoolTable> schoolTables = mLiteOrm.query(new QueryBuilder<>(SchoolTable.class)
                 .where(SchoolTable.COL_NAME + " IN " + stringBuilder.toString()));
         return schoolTables == null ? new ArrayList<SchoolTable>() : schoolTables;
+    }
+
+    public static List<CommentTable> queryCommentList(String majorId){
+        if(TextUtils.isEmpty(majorId) || mLiteOrm == null){
+            return new ArrayList<>();
+        }
+
+        List<CommentTable> result = mLiteOrm.query(new QueryBuilder<>(CommentTable.class).where(CommentTable.COLUMN_MAJOR_ID + "='" + majorId+"'").
+                appendOrderDescBy(CommentTable.COLUMN_DATE));
+        return result == null ? new ArrayList<CommentTable>():result;
     }
 
     public static void newUser(UserTable userTable) {

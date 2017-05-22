@@ -39,6 +39,7 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
     private View mLineContainer;
 
     private int mSchoolId;
+    private View mCommentBtn;
 
     public static void start(Context context, int majorId,int schoolId) {
         Intent starter = new Intent(context, MajorDetailActivity.class);
@@ -79,6 +80,9 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
         mMajorCountContainer = findViewById(R.id.activity_major_detail_major_count_container);
         mCollegeCountContainer = findViewById(R.id.activity_major_detail_college_count_container);
         mLineContainer = findViewById(R.id.activity_major_detail_line_container);
+
+        mCommentBtn = findViewById(R.id.activity_major_comment_btn);
+
         mMajorCountContainer.setTag(mMajorCountTv);
         mCollegeCountContainer.setTag(mCollegeCountTv);
         mLineContainer.setTag(mLineTv);
@@ -114,6 +118,7 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void addListener() {
+        mCommentBtn.setOnClickListener(this);
         if (canEdit()) {
             super.addListener();
             mMajorCountContainer.setOnClickListener(this);
@@ -132,6 +137,14 @@ public class MajorDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
+
+        int id = v.getId();
+
+        if(id == R.id.activity_major_comment_btn){
+            CommentActivity.start(this, mMajorTable.getMajorId());
+            return;
+        }
+
         mEditingTv = null;
         if (v instanceof TextView) {
             mEditingTv = (TextView) v;
